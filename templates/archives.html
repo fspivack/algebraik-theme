@@ -1,0 +1,14 @@
+{# archives.html #}
+{% extends "base.html" %}
+
+{% if not period %}{% block extratitle %}Archives{% endblock extratitle %}{% endif %}
+
+
+{% block content %}
+
+<div class="blog-hero"><div class="blog-hero-content"><h1>Archives for {{ SITENAME }}</h1></div></div>
+<div class="main-text">
+    {% include 'archive_content.html' %}
+</div>
+    
+{% endblock content %}

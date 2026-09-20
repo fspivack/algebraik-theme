@@ -1,0 +1,64 @@
+{# article.html #}
+{%- extends "base.html" %}
+{%- import '_shared_macros.html' as mac %}
+
+{%- block html_lang %}{{ article.lang }}{%- endblock %}
+
+{%- block extratitle %}{{ article.title|striptags }}{%- endblock extratitle %}
+
+{%- block head %}
+    {{ super() }}
+
+    {%- import 'translations.html' as translations with context %}
+    {%- if translations.entry_hreflang(article) %}
+        {{ translations.entry_hreflang(article) }}
+    {%- endif %}
+
+    {%- if article.description %}
+        <meta name="description" content="{{ article.description }}">
+    {%- endif %}
+
+    {%- for tag in article.tags %}
+        <meta name="tags" content="{{ tag }}">
+    {%- endfor %}
+
+{%- endblock head %}
+
+{%- block content %}
+<div class="article-hero"><div class="article-hero-content">
+    <h1>{{ article.title }}</h1>
+</div></div>
+<!--<div class="top-section post-wrap">
+    <h1>{{ article.title }}</h1>
+    {% if article.subtitle %}
+        <h2>{{ article.subtitle }}</h2>
+    {% endif %}
+</div>-->
+<div class="main-text">
+<p class="small-info">
+    {%- if article.authors %}
+        By {{ mac.format_authors(article.authors) }} |
+    {%- endif %}
+    <time datetime="{{ article.date.isoformat() }}">
+        {{ article.locale_date }}
+    </time>
+    {%- if article.modified and article.modified != article.date %}
+        | Updated on
+        <time datetime="{{ article.modified.isoformat() }}">
+            {{ article.modified.strftime(DEFAULT_DATE_FORMAT) }}
+        </time>
+    {%- endif %}
+</p>
+{{ article.content }}
+<p class="tags">
+    In category: <a href="{{ SITEURL }}/{{ category.url }}">{{ article.category }}</a>
+    {%- if article.tags %}
+        <br><br>
+        Tags:
+        {%- for tag in article.tags %}{# Removed 'class="tag"'. Possibly put back #}
+             <a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a>
+        {%- endfor %}
+    {%- endif %}
+</p>
+</div>
+{%- endblock content %}

@@ -1,0 +1,206 @@
+{% from 'css/vars.css' import get_var %}
+{% set tv = THEME_CSS_VARS %}
+
+{% macro set_hero(class, style) %}
+    {% if style == "home" %}
+        {% set hero = "
+.{class} {
+    text-align: center;
+    margin: 0 auto 4rem auto;
+    max-width: 30rem;
+    border-style: none;
+    box-shadow: 0 4px 12px " + get_var(tv, 'post_decoration_col') + ";
+    padding: 0.2rem 0.8rem;
+
+    /* Flexbox info */
+    min-height: 9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}" + "
+@media only screen and (min-width: 20rem) {
+    .{class} {
+        padding: 2rem;
+        color: " + get_var(tv, 'heading_col') + ";
+        baground-color: " + get_var(tv, 'heading_bg') + ";
+    }
+}
+.{class}:hover, .top-section:focus-within {
+    transform: scale(1.02);
+}
+.{class} h2 {
+    font-weight: normal;
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    line-height: 1.2rem;
+}
+"
+     %}
+    {% elif style == "subpage" %}
+        {% set hero = "
+.{class} {
+    text-align: center;
+    margin: 0 auto 4rem auto;
+    max-width: 30rem;
+    border-style: none;
+    box-shadow: 0 4px 12px " + get_var(tv, 'post_decoration_col') + ";
+    padding: 0.2rem 0.8rem;
+
+    /* Flexbox info */
+    min-height: 9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}" + "
+@media only screen and (min-width: 20rem) {
+    .{class} {
+        padding: 2rem;
+        color: " + get_var(tv, 'heading_col') + ";
+        baground-color: " + get_var(tv, 'heading_bg') + ";
+    }
+}
+.{class}:hover, .top-section:focus-within {
+    transform: scale(1.02);
+}
+.{class} h2 {
+    font-weight: normal;
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    line-height: 1.2rem;
+}
+"
+     %}
+    {% elif style == "blog" %}
+        {% set hero = "
+.{class} {
+    color: " + get_var(tv, 'heading_col') + ";
+    background-color: " + get_var(tv, 'heading_bg') + ";
+    margin: 2em;
+    text-align: center;
+" %}
+    {% else %} {# assume article #}
+    {% set hero = "
+.{class} {
+    border-style: solid;
+    border-width: 2px 0;
+    border-color: " +  get_var(tv, 'heading_col') + ";
+    padding: 1.5rem 0;
+    margin: 0 auto 3.5rem auto;
+    text-align: center;
+}
+" %}
+    {% endif %}
+    {{ hero | replace('{class}', class) }}
+{% endmacro %}
+
+main {
+    margin-top: 3rem;
+}
+@media only screen and (min-width 53.125rem) {
+    main {
+        margin-top: 7.05rem;
+    }
+}
+.content-styles {
+    margin: 1rem auto 5rem auto;
+    max-width: 45rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+.post-wrap a {
+    text-decoration: none;
+}
+.post-wrap {
+    border-style: none;
+    box-shadow: 4px 4px 8px 4px {{ get_var(tv, 'post_decoration_col') }};
+    padding: 0.2rem 0.8rem;
+    transition: transform 0.2s;
+    margin-bottom: 1rem;
+}
+@media only screen and (min-width: 33rem) {
+    .post-wrap a {
+        text-decoration: none;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+    }
+}
+.post-wrap a:focus {
+    outline: none;
+}
+/* 'focus-within' needed for when the links within 'post-wrap' are focussed */
+.post-wrap:hover, .post-wrap:focus-within {
+    transform: scale(1.02);
+}
+.articles-h-style {
+    margin: 1rem 0;
+    font-size: 1.17rem; /* standard size of h3, for use in h2 for blogposts */
+}
+.small-info {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: {{ get_var(tv, 'small_info_col') }};
+    background-color: {{ get_var(tv, 'small_info_bg') }};
+}
+.small-info a {
+    color: {{ get_var(tv, 'small_info_col') }};
+    background-color: {{ get_var(tv, 'small_info_bg') }};
+    text-decoration: none;
+}
+.tags, .tags a {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: {{ get_var(tv, 'tag_col') }};
+    background-color: {{ get_var(tv, 'tag_bg') }};
+}
+/* .top-section { */
+/*     text-align: center; */
+/*     margin: 0 auto 4rem auto; */
+/*     max-width: 30rem; */
+/*     border-style: none; */
+/*     box-shadow: 0 4px 12px {{ get_var(tv, 'post_decoration_col') }}; */
+/*     padding: 0.2rem 0.8rem; */
+
+/*     /\* Flexbox info *\/ */
+/*     min-height: 9rem; */
+/*     display: flex; */
+/*     flex-direction: column; */
+/*     justify-content: center; */
+/* } */
+/* @media only screen and (min-width: 20rem) { */
+/*     .top-section { */
+/*         padding: 2rem; */
+/*         color: {{ get_var(tv, 'heading_col') }}; */
+/*         baground-color: {{ get_var(tv, 'heading_bg') }}; */
+/*     } */
+/* } */
+/* .top-section:hover, .top-section:focus-within { */
+/*     transform: scale(1.02); */
+/* } */
+/* .top-section h2 { */
+/*     font-weight: normal; */
+/*     font-size: 1rem; */
+/*     font-weight: bold; */
+/*     padding-top: 0.5rem; */
+/*     line-height: 1.2rem; */
+/* } */
+/* .article-top-section { */
+/*     border-style: solid; */
+/*     border-width: 2px 0; */
+/*     border-color: {{ get_var(tv, 'heading_col') }}; */
+/*     padding: 1.5rem 0; */
+/*     margin: 0 auto 3.5rem auto; */
+/*     text-align: center; */
+/* } */
+{{ set_hero('hero-home', get_var(tv, 'home_hero_style')) }}
+{{ set_hero('hero', get_var(tv, 'subpage_hero_style')) }}
+{{ set_hero('article-hero', get_var(tv, 'article_hero_style')) }}
+{{ set_hero('blog-hero', get_var(tv, 'blog_hero_style')) }}
+.no-posts {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}

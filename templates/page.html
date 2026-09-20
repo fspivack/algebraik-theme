@@ -1,0 +1,23 @@
+{# page.html #}
+{% extends "base.html" %}
+
+{% block html_lang %}{{ page.lang }}{% endblock %}
+
+{% block extratitle %}{{ page.title }}{% endblock extratitle %}
+
+{% block content %}
+<div class="hero"><div class="hero-content">
+    <h1>{{ page.title }}</h1>
+    {% if page.subtitle %}
+        <h2>{{ page.subtitle }}</h2>
+    {% endif %}
+</div></div>
+<div class="main-text">
+    {% if page.blog_landing_page == 'True' %}
+        <section id="landing-page-content">{{ page.content }}</section>
+        {% include 'articles_loop.html' %}
+    {% else %}
+        {{ page.content }}
+    {% endif %}
+</div></div>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{# period_archives.html #}
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="blog-hero"><div class="blog-hero-content">
+         <h1>Archives for {{ period | reverse | join(' ') }}</h1>
+     </div></div>
+
+    <div class="main-text">
+        {% include 'archive_content.html' %}
+    </div>
+{% endblock %}

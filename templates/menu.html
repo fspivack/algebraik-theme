@@ -1,0 +1,143 @@
+{# menu.html #}
+{# Note use of '-' to remove newlines from output (and therefore gaps between menu items) #}
+{#
+  Rough explanation of the logic:
+
+    If config says DISPLAY_HOME_ON MENU
+        - Display homepage on menu
+        - Set aria-current to page and highlight menu link, if on that page
+    If config says DISPLAY_PAGES_ON_MENU
+        - Display all pages on menu APART FROM landing pages, which are taken care of later
+        - Use the pages menuname if it exists in the metadata
+        - Otherwise use the page's title, titlezing if TITLEIZE_MENU is true
+        - Set aria-current to page and highlight menu link, if on that page
+    For each menu item in MENUITEMS
+        - Display each menu item
+        - Set aria-current to page and highlight menu link, if on that page
+        - Set aria-current to location and highlight menu link, if on subpage or article which has it as landing_page
+    If config says DISPLAY_LANDING_PAGES_ON_MENU
+        - Display each landing page
+        - Use the pages menuname if it exists in the metadata
+        - Otherwise use the page's title, titlezing if TITLEIZE_MENU is true
+        - Set aria-current to page and highlight menu link, if on that page
+        - Set aria-current to location and highlight menu link, if on article which it as a landing page
+    If DISPLAY_CATEGORIES_ON_MENU
+        - Display each category page
+        - Use the pages menuname if it exists in the metadata
+        - Otherwise use the page's title, titlezing if TITLEIZE_MENU is true
+        - Set aria-current to page and highlight menu link, if on that page
+        - Set aria-current to location and highlight menu link, if on an article in that category
+#}
+{# todo: make DRYer #}
+
+{# Macro to make sure it works when we compare urls with the links given in MENUITEMS #}
+{% macro normalise_url(url) %}
+    {# Remove SITEURL from the beginning, '.html' from the end, and leading and trailing slashes #}
+    {% set u = url %}
+    {%- if SITEURL and u.startswith(SITEURL) -%}
+        {%- set u = u[SITEURL|length:] -%} {# Remove the FIRST occurence of SITEURL from the url #}
+    {%- endif -%}
+    {%- if u.endswith('.html') %}
+        {%- set u = u[:-5] -%} {# remove the last 5 chars ('.html') #}
+    {%- endif -%}
+    {# {{ u|trim('/')|trim }} #}
+    {%- set u = u|trim('/')|trim -%}
+    {{- u -}}
+{% endmacro %}
+
+{%- if DISPLAY_HOME_ON_MENU != False -%}{# Defaults to 'True' #}
+    <li><a href="{{ SITEURL }}/"
+           {# {%- if (not page and not article and not category and not tag and not author) %} #}
+           {%- if output_file == INDEX_SAVE_AS %}
+               aria-current="page" class="active-menu-item"
+           {%- endif %}>Home</a></li>
+{%- endif %}
+{%- if DISPLAY_PAGES_ON_MENU != False %}{# Defaults to "True" #}
+    {%- for p in pages -%}
+        {%- if p.home != 'True' and not p.landing_page_for and not p.archive_page_for %}
+            {# Don't include homepage in pages menu links unless requested - user can manually
+            put homepage menu link. Similarly landing pages and tag-specific archive pages -#}
+            <li><a href="{{ SITEURL }}/{{ p.url }}"
+            {# Note we have changed from {%- if p == page %} because it was unreliable #}
+            {%- if page and normalise_url(p.url) == normalise_url(page.url) %}
+                aria-current="page" class="active-menu-item"
+            {%- elif page and normalise_url(page.url).startswith(normalise_url(p.url)) %}
+                aria-current="location" class="active-menu-item"
+            {%- endif %}>
+            {%- if p.menuname %}
+                {# Assume user will put capitalisations as they wish in 'menulink' #}
+                {{ p.menuname }}
+            {%- else %}
+                {%- if TITLEIZE_MENU == False -%}
+                    {{ p.title }}
+                {%- else %}
+                    {{ p.title|title }}
+                {%- endif %}
+            {%- endif %}</a></li>
+        {%- endif %}
+    {%- endfor %}
+{%- endif %}
+{%- for name, link in MENUITEMS -%}
+    <li><a href="{{ link }}"
+       {%- for p in pages -%}
+            {# The following bit sets the menu link to active if it is a
+            landing page for an article type which the user is on #}
+            {%- if normalise_url(link) == normalise_url(p.url) -%}
+                {%- if article and p.landing_page_for in article.tags %}
+                    aria-current="location" class="active-menu-item"
+                {%- endif %}
+            {%- endif %}
+        {%- endfor %}
+        {%- if page and normalise_url(page.url).startswith(normalise_url(link)) %}
+            aria-current="location" class="active-menu-item"
+        {%- endif %}
+        {# The following ensures correct active link highlighting including for the homepage #}
+        {%- if
+           (page and normalise_url(link) ==  normalise_url(page.url)) or
+           (article and normalise_url(link) == normalise_url( article.url)) or
+           (category and normalise_url(link) == normalise_url(category.url)) or
+           (tag and normalise_url(link) == normalise_url(tag.url)) or
+           (author and normalise_url(link) == normalise_url(author.url)) or
+           (not page and not article and not category and not tag and not author and normalise_url(link) == "")
+        -%}
+            aria-current="page" class="active-menu-item"
+        {%- endif %}
+        >{{ name }}
+    </a></li>
+{%- endfor %}
+{%- if DISPLAY_LANDING_PAGES_ON_MENU %}{# Defaults to "False" #}
+    {%- for lp in pages|selectattr("landing_page_for") -%}
+        <li><a href="{{ SITEURL }}/{{ lp.url }}"
+            {%- if (page and page.url == lp.url) %}
+                aria-current="page" class="active-menu-item"
+            {%- elif article and lp.landing_page_for in article.tags %}
+                    aria-current="location" class="active-menu-item"
+            {%- endif %}>
+            {%- if lp.menuname %}
+                {# Assume user will put capitalisations as they wish in 'menuname' #}
+                {{ lp.menuname }}
+            {%- else %}
+                {%- if TITLEIZE_MENU == False -%}
+                    {{ lp.title }}
+                {%- else %}
+                    {{ lp.title|title }}
+                {%- endif %}
+            {%- endif %}</a></li>
+    {%- endfor %}
+{%- endif -%}
+{%- if DISPLAY_CATEGORIES_ON_MENU != False %}{# Defaults to "True" #}
+    {%- for cat, _ in categories -%}
+        <li><a href="{{ SITEURL }}/{{ cat.url }}"
+             {%- if category and cat == category and not article %}
+                 aria-current="page" class="active-menu-item"
+             {%- elif category and cat == category %}
+                 aria-current="location" class="active-menu-item"
+             {%- endif %}>
+            {%- if TITLEIZE_MENU == False %}
+                {{ cat }}
+            {%- else %}
+                {{ cat|title() }}
+            {%- endif %}
+          </a></li>
+    {%- endfor %}
+{%- endif %}

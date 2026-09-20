@@ -1,0 +1,11 @@
+{# archive_content.html #}
+
+<dl>
+    {% for article in dates %}
+        {% if not page or page.archive_page_for in article.tags %}
+            <dt>{{ article.locale_date }}</dt>
+            <dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
+        {% endif %}
+    {% endfor %}
+</dl>
+

@@ -1,0 +1,14 @@
+*.log
+*.pyc
+*__pycache__/
+node_modules/
+.env
+.#*
+.~lock.*#
+*~
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+.venv/
+scratch/
+*.egg-info/

@@ -1,0 +1,41 @@
+{% from 'css/vars.css' import get_var %}
+
+{#
+    These are the styles which should be filled in by each style option. Each of
+    these classes also can (and should) have their sub-elelments styled. Also,
+    they can have different styles depending on media queries.
+#}
+
+main {
+    /* e.g. margin */
+}
+.content-styles {
+    /* e.g. margin */
+}
+.post-wrap {
+    /* style */
+}
+.post-wrap a {
+    /* style */
+}
+.articles-h-style {
+    /* e.g. margin, font-size */
+}
+.small-info {
+    /* colours, size etc. */
+}
+.tags, .tags a {
+    /* colours, size etc. */
+}
+.top-section {
+    /* styles */
+}
+.top-section h2 {
+    /* styles */
+}
+.article-top-section {
+    /* styles */
+}
+.main-text {
+    /* e.g. marign and max-width */
+}

@@ -1,0 +1,35 @@
+{# blog_page.html #}
+{% extends "base.html" %}
+
+{#
+    The intention of this page is that it can be used as a template for pages
+    which are designed as
+    - landing pages for a particular tag, or
+    - landing page for a series
+
+    In rst, for the first case use:
+    ":template: blog_page"
+    and
+    ":landing_page_for: [name of sub-blog tag]"
+
+    For the second case use:
+    ":template: blog_page"
+    and
+    ":series: [name of series]"
+    In both cases, must be used by a page
+#}
+
+{% block html_lang %}{{ page.lang }}{% endblock %}
+
+{% block extratitle %}{{ page.title }}{% endblock extratitle %}
+
+{% block content %}
+
+<div class="blog-hero"><div class="blog-hero-content"><h1>{{ page.title }}</h1></div></div>
+
+<div class="main-text">
+    <section id="landing-page-content">{{ page.content }}</section>
+    {% include "articles_loop.html" %}
+</div>
+
+{% endblock content %}

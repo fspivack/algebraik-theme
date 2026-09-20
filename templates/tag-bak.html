@@ -1,0 +1,37 @@
+{# tag.html #}
+{%- extends "base.html" %}
+
+{# Loops wipe variables, so we get round it by using a namespace #}
+{% set np = namespace(landing_page=None) %}
+{% for page in pages %}
+    {% if page.landing_page_for == tag %}
+        {% set np.landing_page = page %}
+    {% endif %}
+{% endfor %}
+
+{%- block extratitle %}
+    {% if np.landing_page %}
+        {{ tag }}
+    {% else %}
+        Tag: {{ tag }}
+    {% endif %}
+{%- endblock extratitle %}
+
+{%- block content %}
+<div class="blog-hero"><div class="blog-hero-content">
+        {% if np.landing_page %}
+            <h1>{{ np.landing_page.title }}</h1>
+        {% else %}
+            <h1>Articles with tag "{{ tag }}"</h1>
+        {% endif %}
+</div></div>
+
+<div class="main-text">
+    {% if np.landing_page %}
+        <section id="landing-page-content">{{ np.landing_page.content }}</section>
+    {% endif %}
+    {%- include 'articles_loop.html' %}
+</div>
+
+
+{%- endblock content %}

@@ -1,0 +1,15 @@
+{# categories.html #}
+{% extends "base.html" %}
+
+{%- block extratitle %}Tags{%- endblock extratitle %}
+{% block content %}
+    <div class="blog-hero"><div class="blog-hero-content"><h1>Tags</h1></div></div>
+
+    <div class="main-text">
+        <ul>
+            {% for tag, articles in tags|sort %}
+                <li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a> ({{ articles|count }})</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}

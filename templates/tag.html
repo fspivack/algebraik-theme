@@ -1,0 +1,14 @@
+{# tag.html #}
+{%- extends "base.html" %}
+
+{%- block extratitle %}Tag: {{ tag }}{%- endblock extratitle %}
+
+{%- block content %}
+{% if not page %}
+<div class="blog-hero"><div class="blog-hero-content"><h1>Articles with tag "{{ tag }}"</h1></div></div>
+{% endif %}
+
+<div class="main-text">{%- include 'articles_loop.html' %}</div>
+
+
+{%- endblock content %}

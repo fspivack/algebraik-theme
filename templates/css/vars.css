@@ -1,0 +1,48 @@
+{% macro get_var(theme_vars, var) %}
+    {% set v = theme_vars | default({}) %}
+    {# {% set default_font_stack = "'Open Sans', 'Liberation Sans', 'FreeSans', Arial, sans-serif" %} #}
+    {% set default_font_stack = "Inter, system-ui, -apple-system, 'Segoe UI', 'Liberation Sans', Arial, sans-serif" %}
+    {% set theme = {
+        'menu_bg': v.get('menu_bg', '#2e79a3'),
+        'menu_col': v.get('menu_col', 'white'),
+        'heading_bg': v.get('heading_bg', 'white'),
+        'heading_col': v.get('heading_col', '#173e53'),
+        'hmbg_menu_bg': v.get('hmbg_menu_bg', v.get('heading_col', '#173e53')),
+        'hmbg_menu_col': v.get('hmbg_menu_col', v.get('heading_bg', 'white')),
+        'hmbg_hover_bg': v.get('hmbg_hover_bg', v.get('menu_bg', '#2e79a3')),
+        'hmbg_hover_col': v.get('hmbg_hover_col', v.get('menu_col', 'white')),
+                          
+        'button_col': v.get('button_col', v.get('heading_bg', 'white')),
+        'button_bg': v.get('button_bg', v.get('heading_col', '#173e53')),
+                     
+        'bttn_focus_bg': v.get('bttn_focus_bg', v.get('menu_bg', '#2e79a3')),
+        'bttn_focus_col': v.get('bttn_focus_col', v.get('menu_col', 'white')),
+                          
+        'skip_link_bg': v.get('skip_link_bg', v.get('hmbg_menu_bg', '#173e53')),
+        'skip_link_col': v.get('skip_link_col', v.get('hmbg_menu_col', 'white')),
+        'footer_col': v.get('footer_bg', v.get('heading_bg', 'white')),
+        'footer_bg': v.get('footer_col', v.get('heading_col','#173e53')),
+        'link_bg': v.get('link_bg', v.get('heading_bg', 'white')),
+        'link_col': v.get('link_col', v.get('heading_col', '#173e53')),
+        'post_decoration_col': v.get('post_decoration_col', v.get('menu_bg', '#2e79a3')),
+        'small_info_bg': v.get('small_info_bg', v.get('heading_bg', 'white')),
+        'small_info_col': v.get('small_info_col', v.get('heading_col', '#173e53')),
+        'tag_bg': v.get('tag_bg', v.get('heading_bg', 'white')),
+        'tag_col': v.get('tag_col', v.get('heading_col', '#173e53')),
+        'focus_bg': v.get('focus_bg', v.get('menu_col', 'white')),
+        'focus_col': v.get('focus_col',  v.get('menu_bg', '#2e79a3')),
+        'main_bg': v.get('main_bg', 'white'),
+        'main_col': v.get('main_col', 'black'),
+        'font_stack': v.get('font_stack', default_font_stack),
+        'fit_logo': v.get('fit_logo', True),
+
+        'home_hero_style': v.get('home_hero_style', 'home'),
+        'subpage_hero_style': v.get('subpage_hero_style', 'subpage'),
+        'blog_hero_style': v.get('blog_hero_style', 'blog'),
+        'article_hero_style': v.get('article_hero_style', 'article'),
+
+        'hero_heading_bg': v.get('hero_heading_bg', 'rgba(0, 0, 0, 0.4)'),
+        'hero_heading_col': v.get('hero_heading_col', 'white'),
+    } %}
+    {{- theme[var] -}}
+{% endmacro %}

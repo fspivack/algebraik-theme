@@ -1,0 +1,8 @@
+{# base.html #}
+{% extends "base_common.html" %}
+{#
+    The purpose of this template is to allow titles of the form:
+    [pagename] | [sitename]
+#}
+
+{% block title %}{% block extratitle %}{% endblock  extratitle %} | {{ SITENAME|striptags }}{% endblock title %}

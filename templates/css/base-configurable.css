@@ -1,0 +1,126 @@
+{% from 'css/vars.css' import get_var %}
+{% set tv = THEME_CSS_VARS %}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/theme/fonts/inter/Inter-Regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url('/theme/fonts/inter/Inter-SemiBold.woff2') format('woff2');
+}
+
+* {
+    font-family: {{ get_var(tv, 'font_stack') }};
+}
+.content {
+    background-color: {{ get_var(tv, 'main_bg') }};
+    color: {{ get_var(tv, 'main_col') }};
+}
+.content a:not(.tags a):not(.small-info a) {
+    color: {{ get_var(tv, 'link_col') }};
+    background-color: {{ get_var(tv, 'link_bg') }};
+}
+.content a:active:not(article a:active),
+.content a:focus:not(article a:focus),
+.content a:hover:not(article a:hover) {
+    color: {{ get_var(tv, 'focus_col') }};
+}
+footer {
+    background-color: {{ get_var(tv, 'footer_bg') }};
+    color: {{ get_var(tv, 'footer_col') }};;
+}
+.skip-link {
+    background-color: {{ get_var(tv, 'skip_link_bg') }};
+    color: {{ get_var(tv, 'skip_link_col') }};
+}
+.top {
+
+    background-color: {{ get_var(tv, 'menu_bg') }};
+}
+@media only screen and (min-width: 53.125rem) {
+    .h-menu-items li {
+        background-color:{{ get_var(tv, 'menu_bg') }};
+    }
+    .h-menu-items a {
+        background-color: {{ get_var(tv, 'menu_bg') }};
+        color: {{ get_var(tv, 'menu_col') }};
+    }
+    .h-menu-items a:not(.active-menu-item) {
+        border-color: {{ get_var(tv, 'menu_bg') }};
+    }
+    .h-menu-items a:hover, .h-menu-items a:focus, .active-menu-item {
+        border-color: {{ get_var(tv, 'menu_col') }};
+    }
+}
+.v-menu-items li {
+    background-color: {{ get_var(tv, 'hmbg_menu_bg') }};
+}
+.v-menu-items a {
+    background-color:  {{ get_var(tv, 'hmbg_menu_bg') }};;
+    color: {{ get_var(tv, 'hmbg_menu_col') }};
+}
+.v-menu-items a:hover, .v-menu-items a:focus {
+    background-color: {{ get_var(tv, 'hmbg_hover_bg') }};
+    color:  {{ get_var(tv, 'hmbg_hover_col') }};
+}
+.content h2:not(.hero-home h2, .article-hero h2, .blog-hero h2, .hero h2) {
+    border-color: {{ get_var(tv, 'heading_col') }};
+}
+.content h1:not(.hero-home h1, .article-hero h1, .blog-hero h1, .hero h1),
+.content h2:not(.hero-home h2, .article-hero h2, .blog-hero h2, .hero h2),
+.content h3,
+.content h4 {
+    color: {{ get_var(tv, 'heading_col') }};
+    background-color: {{ get_var(tv, 'heading_bg') }};
+}
+.content li {
+    margin: 0.75rem 0;
+}
+.content li::marker {
+    color: {{ get_var(tv, 'heading_col') }};
+    background-color: {{ get_var(tv, 'heading_bg') }};
+}
+.back-to-top:not(:focus) {
+    background-color:{{ get_var(tv, 'button_bg') }};
+    color: {{ get_var(tv, 'button_col') }};
+}
+.change-theme {
+    background-color: {{ get_var(tv, 'button_bg') }};
+    color: {{ get_var(tv, 'button_col') }};
+}
+.theme-change {
+    background-color: {{ get_var(tv, 'bttn_focus_bg') }};
+    color: {{ get_var(tv, 'bttn_focus_col') }};
+}
+.back-to-top:focus, .change-theme:focus {
+    background-color: {{ get_var(tv, 'bttn_focus_bg') }};
+    color: {{ get_var(tv, 'bttn_focus_col') }};
+}
+.hambrg-bttn {
+    background-color: {{ get_var(tv, 'hmbg_menu_bg') }};
+    color: {{ get_var(tv, 'hmbg_menu_col') }};
+}
+.top-logo {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+{% if get_var(tv, 'fit_logo') == "False" %}
+    @media only screen and (min-width: 33rem) {
+        .top-logo {
+            height: 6rem;
+            margin: 0.5rem;
+        }
+    }
+{% endif %}

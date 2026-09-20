@@ -1,0 +1,23 @@
+{# archives_specific.html #}
+{% extends "base.html" %}
+
+{#
+    Use this as template for a page for a specific sub-blog.
+    In rst use
+    ":template: archives_specific"
+    and
+    ":archive_page_for: [name of sub-blog tag]"
+    Must be used by a page
+#}
+
+{% block extratitle %}Archives for {{ page.archive_page_for|title }}{% endblock extratitle %}
+
+{% block content %}
+
+<h1>{{ page.title }}</h1>
+
+{{ page.content }}
+
+{% include 'archive_content.html' %}
+
+{% endblock content %}

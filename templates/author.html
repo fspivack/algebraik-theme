@@ -1,0 +1,10 @@
+{# author.html #}
+{% extends "base.html" %}
+
+{%- block extratitle %}{{ author }}{%- endblock extratitle %}
+
+{% block content %}
+    <div class="blog-hero"><div class="blog-hero-content"><h1>Articles by {{ author }}</h1></div></div>
+
+    <div class="main-text">{% include 'articles_loop.html' %}</div>
+{% endblock %}

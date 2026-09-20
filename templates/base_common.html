@@ -1,0 +1,142 @@
+{# base.html #}
+
+<!DOCTYPE html>
+<html lang="{%- block html_lang %}{{ DEFAULT_LANG }}{%- endblock html_lang %}">
+<head>
+    <meta charset="utf-8">
+    <meta name="generator" content="Pelican">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{%- block title %}{{ SITENAME|striptags }}{%- endblock title %}</title>
+    {%- block head %}
+        {%- if SITESUBTITLE %}
+            <meta name="description" content="{{ SITESUBTITLE }}" />
+        {%- endif %}
+
+        {#
+        <style>
+            {%- include 'css/style.css' %}
+        </style>
+        #}
+        
+        <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/basestyle.css">
+
+        
+        {%- if ALTERNATIVE_STYLES_FILE %}
+            <!-- <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ ALTERNATIVE_STYLES_FILE }}"> -->
+            <style>
+                {%- include 'css/style-option3.css' %}
+            </style>
+        {%- else %}
+            <style>
+                {%- include 'css/style-option1.css' %}
+            </style>
+        {%- endif %}
+        <style>
+            {%- include 'css/base-configurable.css' %}
+        </style>
+        {%- if PYGMENTS_FILE %}
+            <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ PYGMENTS_FILE }}">
+        {%- endif %}
+
+        {%- if FEED_ALL_ATOM %}
+            <link href="{{ FEED_DOMAIN }}/{%- if FEED_ALL_ATOM_URL %}{{ FEED_ALL_ATOM_URL }}{%- else %}{{ FEED_ALL_ATOM }}{%- endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|striptags }} Full Atom Feed" />
+        {%- endif %}
+        {%- if FEED_ALL_RSS %}
+            <link href="{{ FEED_DOMAIN }}/{%- if FEED_ALL_RSS_URL %}{{ FEED_ALL_RSS_URL }}{%- else %}{{ FEED_ALL_RSS }}{%- endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME|striptags }} Full RSS Feed" />
+        {%- endif %}
+        {%- if FEED_ATOM %}
+            <link href="{{ FEED_DOMAIN }}/{%if FEED_ATOM_URL %}{{ FEED_ATOM_URL }}{%- else %}{{ FEED_ATOM }}{%- endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|striptags }} Atom Feed" />
+        {%- endif %}
+        {%- if FEED_RSS %}
+            <link href="{{ FEED_DOMAIN }}/{%- if FEED_RSS_URL %}{{ FEED_RSS_URL }}{%- else %}{{ FEED_RSS }}{%- endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME|striptags }} RSS Feed" />
+        {%- endif %}
+        {%- if CATEGORY_FEED_ATOM and category %}
+            <link href="{{ FEED_DOMAIN }}/{%- if CATEGORY_FEED_ATOM_URL %}{{ CATEGORY_FEED_ATOM_URL.format(slug=category.slug) }}{%- else %}{{ CATEGORY_FEED_ATOM.format(slug=category.slug) }}{%- endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|striptags }} Categories Atom Feed" />
+        {%- endif %}
+        {%- if CATEGORY_FEED_RSS and category %}
+            <link href="{{ FEED_DOMAIN }}/{%- if CATEGORY_FEED_RSS_URL %}{{ CATEGORY_FEED_RSS_URL.format(slug=category.slug) }}{%- else %}{{ CATEGORY_FEED_RSS.format(slug=category.slug) }}{%- endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME|striptags }} Categories RSS Feed" />
+        {%- endif %}
+        {%- if TAG_FEED_ATOM and tag %}
+          <link href="{{ FEED_DOMAIN }}/{%- if TAG_FEED_ATOM_URL %}{{ TAG_FEED_ATOM_URL.format(slug=tag.slug) }}{%- else %}{{ TAG_FEED_ATOM.format(slug=tag.slug) }}{%- endif %}" type="application/atom+xml" rel="alternate" title="{{ SITENAME|striptags }} Tags Atom Feed" />
+        {%- endif %}
+        {%- if TAG_FEED_RSS and tag %}
+            <link href="{{ FEED_DOMAIN }}/{%- if TAG_FEED_RSS_URL %}{{ TAG_FEED_RSS_URL.format(slug=tag.slug) }}{%- else %}{{ TAG_FEED_RSS.format(slug=tag.slug) }}{%- endif %}" type="application/rss+xml" rel="alternate" title="{{ SITENAME|striptags }} Tags RSS Feed" />
+        {%- endif %}
+        {%- if LOGO_SVG %}
+            <link rel="icon" href="{{ SITEURL }}/{{ LOGO_SVG }}" type="image/svg">
+        {%- elif LOGO_PNG %}
+            <link rel="icon" href="{{ SITEURL }}/{{ LOGO_PNG }}" type="image/png">
+        {%- endif %}
+    {%- endblock head %}
+
+    <script type="text/javascript" src="{{ SITEURL }}/theme/js/main.js"></script>
+</head>
+<body onresize="resetElements();">
+    <a href="#main-anchor" class="skip-link">Skip to content</a>
+    <header class="top-container">
+        <div class="top">
+            {%- if LOGO_SVG %}
+                <a href="{{ SITEURL }}/"><img class="top-logo" src="{{ SITEURL }}/{{ LOGO_SVG }}" alt="Logo"></a>
+            {%- elif LOGO_PNG %}
+                <a href="{{ SITEURL }}/"><img class="top-logo" src="{{ SITEURL }}/{{ LOGO_PNG }}" alt="Logo"></a>
+            {%- endif %}
+            <nav role="navigation" class="menu">
+                <div class="h-menu-wrapper">
+                <ul class="h-menu-items">
+                    {%- include 'menu.html' %}
+                </ul>
+                </div>
+                <button type="button" aria-pressed="false" onclick="toggleMenu();"
+                        aria-label="Toggle menu" class="hambrg-bttn">
+                    <object class="hambrg-icon" data="{{ SITEURL }}/theme/images/hamburger.svg" tabindex="-1"
+                             type="image/svg+xml" aria-hidden="true">
+                        <img src="{{ SITEURL }}/theme/images/hamburger.png" class="hambrg-img"  alt="Hamburger image">
+                    </object>
+                </button>
+                <ul class="v-menu-items v-menu">
+                    {%- include 'menu.html' %}
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main tabindex="-1" id="main-anchor" class="style-main">
+        <div class="content content-styles">
+            {%- block content %}{%- endblock content %}
+        </div>
+    </main>
+    <div style="clear: both;"></div><!-- Make sure floats don't overlap the footer -->
+    <!--
+    <button type="button" onclick="changeTheme();"
+            aria-label="Change theme" id="change-theme">
+        Change theme
+    </button>
+    <div id="theme-change">Change the theme here!</div>
+    -->
+    <button type="button" onclick="backToTop();"
+            aria-label="Back to top" class="back-to-top">
+        Back to top
+    </button>
+    <footer>
+        <span class="footer-inner">
+            {%- if (not FOOTER_SECTIONS) or (FOOTER_SECTIONS == 1) %}
+                <span class="footer-centre" style="width:100%;">
+                    {%- if FOOTER_CENTRE %}
+                        {{ FOOTER_CENTRE }}
+                    {%- else %}
+                        &copy;{%- if NOW %} {{ NOW|strftime('%Y') }} {% endif %}
+                        {%- if CR_AUTHOR %}{{ CR_AUTHOR }}{%- else %}{{ AUTHOR }}{%- endif %}
+                    {%- endif %}
+                </span>
+            {%- elif FOOTER_SECTIONS == 2 %}
+                <span class="footer-left" style="width:50%;">{{ FOOTER_LEFT }}</span>
+                <span class="footer-right" style="width:50%;">{{ FOOTER_RIGHT }}</span>
+            {%- else %}
+                <span class="footer-left" style="width:33%;">{{ FOOTER_LEFT }}</span>
+                <span class="footer-centre" style="width:33%;">{{ FOOTER_CENTRE }}</span>
+                <span class="footer-right" style="width:33%;">{{ FOOTER_RIGHT }}</span>
+            {%- endif %}
+        </span>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,171 @@
+{% from 'css/vars.css' import get_var %}
+{% set tv = THEME_CSS_VARS %}
+
+{% macro set_hero(class, style) %}
+    {% if style == "home" %}
+        {% set hero = "
+.{class} {
+    text-align: center;
+    width: 100%;
+    background-color: " + get_var(tv, 'menu_bg') + ";
+    color: " + get_var(tv, 'menu_col') + ";
+    margin: 0 auto 4rem auto;
+
+    /* Flexbox info */
+    min-height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.{class} h1 {
+    font-size: 3rem;
+}
+.{class} h2 {
+    max-width: 45rem;
+    margin: 0 auto 0 auto;
+    font-size: 1.2rem;
+    padding-top: 0.8rem;
+}
+"
+     %}
+    {% elif style == "blog" %}
+        {% set hero = "" %}
+    {% else %} {# assume article #}
+        {% set hero = "
+.{class} {
+    text-align: center;
+    width: 100%;
+    background-color: " + get_var(tv, 'menu_bg') + ";
+    color: " + get_var(tv, 'menu_col') + ";
+    margin: 0 auto 4rem auto;
+
+    /* Flexbox info */
+    min-height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.{class} h1 {
+    font-size: 3rem;
+}
+.{class} h2 {
+    max-width: 45rem;
+    margin: 0 auto 0 auto;
+    font-size: 1.2rem;
+    padding-top: 0.8rem;
+}
+"
+     %}
+    {% endif %}
+    {{ hero | replace('{class}', class) }}
+{% endmacro %}
+
+main {
+    margin-top: 0;
+}
+.content-styles {
+    margin: 0 auto 5rem auto;
+}
+.post-wrap {
+    /* style */
+}
+.post-wrap a {
+    /* style */
+}
+.articles-h-style {
+    /* e.g. margin, font-size */
+}
+.small-info {
+    /* colours, size etc. */
+}
+.tags, .tags a {
+    /* colours, size etc. */
+}
+/* .article-top-section, */
+/* .top-section */
+/* { */
+/*     text-align: center; */
+/*     width: 100%; */
+/*     background-color: {{ get_var(tv, 'menu_bg') }} ; */
+/*     color: {{get_var(tv, 'menu_col') }}; */
+/*     margin: 0 auto 4rem auto; */
+
+/*     /\* Flexbox info *\/ */
+/*     min-height: 15rem; */
+/*     display: flex; */
+/*     flex-direction: column; */
+/*     justify-content: center; */
+/* } */
+/* .article-top-section h1, */
+/* .top-section h1 { */
+/*     font-size: 3rem; */
+/* } */
+/* .article-top-section h2, */
+/* .top-section h2 { */
+/*     max-width: 45rem; */
+/*     margin: 0 auto 0 auto; */
+/*     font-size: 1.2rem; */
+/*     padding-top: 0.8rem; */
+/* } */
+{{ set_hero('hero-home', get_var(tv, 'home_hero_style')) }}
+{{ set_hero('hero', get_var(tv, 'subpage_hero_style')) }}
+{{ set_hero('article-hero', get_var(tv, 'article_hero_style')) }}
+{{ set_hero('blog-hero', get_var(tv, 'blog_hero_style')) }}
+.main-text {
+    margin: 1rem auto 5rem auto;
+    max-width: 45rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+.post-wrap a {
+    text-decoration: none;
+}
+.post-wrap {
+    border-style: none;
+    box-shadow: 4px 4px 8px 4px {{ get_var(tv, 'post_decoration_col') }};
+    padding: 0.2rem 0.8rem;
+    transition: transform 0.2s;
+    margin-bottom: 1rem;
+}
+@media only screen and (min-width: 33rem) {
+    .post-wrap a {
+        text-decoration: none;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+    }
+}
+.post-wrap a:focus {
+    outline: none;
+}
+/* 'focus-within' needed for when the links within 'post-wrap' are focussed */
+.post-wrap:hover, .post-wrap:focus-within {
+    transform: scale(1.02);
+}
+.articles-h-style {
+    margin: 1rem 0;
+    font-size: 1.17rem; /* standard size of h3, for use in h2 for blogposts */
+}
+.small-info {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: {{ get_var(tv, 'small_info_col') }};
+    background-color: {{ get_var(tv, 'small_info_bg') }};
+}
+.small-info a {
+    color: {{ get_var(tv, 'small_info_col') }};
+    background-color: {{ get_var(tv, 'small_info_bg') }};
+    text-decoration: none;
+}
+.tags, .tags a {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: {{ get_var(tv, 'tag_col') }};
+    background-color: {{ get_var(tv, 'tag_bg') }};
+}
+.no-posts {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}

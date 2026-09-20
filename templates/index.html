@@ -1,0 +1,27 @@
+{# index.html #}
+{%- extends "base_common.html" %}
+
+{%- block content %}
+<div class="hero-home">
+    <div class="hero-home-content">
+    <h1>{{ SITENAME }}</h1>
+    {%- for page in pages %}
+        {% if page.home == 'True' and page.subtitle %}
+            <h2>{{ page.subtitle }}</h2>
+        {%- endif %}
+    {%- endfor %}
+    </div>
+</div>
+
+<div class="main-text">
+    {%- for page in pages %}
+        {%- if page.home == 'True' %}
+            <section id="landing-page-content">{{ page.content }}</section>
+        {%- endif %}
+    {%- endfor %}
+    {%- if ARTICLES_ON_HOMEPAGE != False %}{# Default is 'True' #}
+        {%- include "articles_loop.html" %}
+    {%- endif %}
+</div>
+
+{%- endblock content %}

@@ -1,0 +1,12 @@
+{# category.html #}
+{% extends "base.html" %}
+
+{# category.html #}
+{% block extratitle %}Category {{ category.name|title }}{% endblock extratitle %}
+
+{% block content %}
+<div class="blog-hero"><div class="blog-hero-content"><h1>Category: {{ category|title }}</h1></div></div>
+
+<div class="main-text">{% include 'articles_loop.html' %}</div>
+{% endblock content %}
+

@@ -1,0 +1,21 @@
+{# _shared_macros.html #}
+{# Contains macros used in more than one file #}
+
+{% macro format_authors(authors) %}
+    {%- set length = authors|length %}
+    {%- if length == 0 %}
+        {# No authors #}
+    {%- elif length == 1 %}
+        <a href="{{ SITEURL }}/{{ authors[0].url }}">{{ authors[0] }}</a>
+    {%- elif length == 2 %}
+        <a href="{{ SITEURL }}/{{ authors[0].url }}">{{ authors[0] }}</a>
+        and
+        <a href="{{ SITEURL }}/{{ authors[1].url }}">{{ authors[1] }}</a>
+    {%- else %}
+        {%- for author in authors[:-1] %}
+            <a href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>, 
+        {%- endfor %}
+            and
+            <a href="{{ SITEURL }}/{{ authors[-1] }}">{{ authors[-1] }}</a>
+    {%- endif %}
+{% endmacro %}

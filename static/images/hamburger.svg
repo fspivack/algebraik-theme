@@ -1,0 +1,12 @@
+<svg version="1.1"
+     baseProfile="full"
+     viewBox="0 0 230 220"
+     xmlns="http://www.w3.org/2000/svg">
+
+    <rect x="20" y="40" rx="10" ry="10" width="190" height="20" fill="white" stroke="white" />
+
+    <rect x="20" y="100" rx="10" ry="10" width="190" height="20" fill="white" stroke="white" />
+
+    <rect x="20" y="160" rx="10" ry="10" width="190" height="20" fill="white" stroke="white" />
+
+</svg>

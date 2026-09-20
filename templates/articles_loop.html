@@ -1,0 +1,97 @@
+{# articles_loop.html #}
+{# Used in several places, therefore making it an 'include' #}
+{%- import '_shared_macros.html' as mac %}
+
+{%- macro readtime(content) -%}
+    {%- if (content|wordcount/200)|round|int <= 1 %}
+        Read time: 1 min
+    {%- else %}
+        Read time: {{ (content|wordcount/200)|round|int }} mins
+    {%- endif %}
+{%- endmacro %}
+
+{# Make sure we give the "no posts message" if no articles found #}
+{# Note that variables are cleared at the end of loops, so we resort to using namespaces #}
+{% set ns = namespace(found=False) %}
+{% set articles = articles_page.object_list if articles_page else articles %}
+{%- for article in articles %}
+    {%- if not page or (page.landing_page_for and (page.landing_page_for in article.tags)) %}
+        {% set ns.found = True %}
+        <article class="post-wrap">
+            <a href="{{ SITEURL }}/{{ article.url }}">
+            {%- if article.cover_img %}
+                <img class="post-thumbnail" src="{{ SITEURL }}/{{ article.cover_img }}" alt="{{ article.cover_img_alt | default('Thumbnail image') }}">
+            {%- elif ALIGN_WITH_PICTURE %}
+                <div class="post-thumbnail"></div>
+            {%- endif %}
+            <div class="flex-text">
+                <h2 class="articles-h-style">
+                    {{ article.title }}
+                </h2>
+                <p class="small-info">
+                    {%- if article.authors %}{# striptags to remove link to author page #}
+                        By {{ mac.format_authors(article.authors)|striptags }} |
+                    {%- endif %}
+                    <time datetime="{{ article.date.isoformat() }}">
+                        {{ article.locale_date }}
+                    </time>
+                    {%- if article.modified and article.modified != article.date %}
+                       | Updated:
+                        <time datetime="{{ article.modified.isoformat() }}">
+                            {{ article.modified.strftime(DEFAULT_DATE_FORMAT) }}
+                        </time>
+                    {%- endif %}
+                    {%- if INCLUDE_READTIME -%}
+                        | {{ readtime(article.content) }}
+                    {%- endif %}
+                </p>
+                {#
+                    The 'striptags' filter changes my 'SUMMARY_END_SUFFIX', which is set to an ellipsis,
+                    to a series of random characters, so I have put in an option to hard-replace it with
+                    an actual ellipsis. Note that, if you get the same bug, you will need to set
+                    'SUMMARY_END_SUFFIX' to something other than an ellipsis for this to work
+                 #}
+                 {%- if SUMMARY_TAGS %}
+                     {{ article.summary|strip_summary }}
+                 {%- else %}
+                     <p class="summary">
+                         {{ article.summary|striptags }}
+                     </p>
+                 {%- endif %}
+                 <p class="small-info">
+                     In: {{ article.category }}
+                     {%- if article.tags %}
+                         | Tags:
+                         {%- for tag in article.tags[:-1] %}{# All but the last... #}
+                             {{ tag }},
+                         {%- endfor %}
+                         {{ article.tags[-1] }}{#... and the last #}
+                     {%- endif %}
+                 </p>
+             </div></a>
+        </article>
+    {%- endif %}
+{%- endfor %}
+{%- if not ns.found %}        
+    <div class="no-posts">
+        <p>{%- if NO_POSTS_MESSAGE %}{{ NO_POSTS_MESSAGE }}{%- else %}No posts yet!{%- endif %}</p>
+    </div>
+{%- endif %}
+
+{% if articles_page %}
+    {% if articles_previous_page and articles_previous_page.url is defined %}
+        <a href="{{ SITEURL }}/{{ articles_previous_page.url }}">← Newer</a>
+    {% endif %}
+    {% if articles_next_page and articles_next_page.url is defined %}
+        <a href="{{ SITEURL }}/{{ articles_next_page.url }}">Older →</a>
+    {% endif %}
+{% endif %}
+
+{# Only gets eexecuted on pages, not index, category, etc. #}
+{% if page and JS_PAGINATION and DEFAULT_PAGINATION %}
+    <a id="newer-link" class="no-display"  href="{{ SITEURL }}/{{ output_file }}">← Newer</a>
+    <a id="older-link" class="no-display" href="{{ SITEURL }}/{{ output_file }}">Older →</a>
+    <script>
+        viewMorePosts({{ DEFAULT_PAGINATION }});
+    </script>
+{% endif %}
