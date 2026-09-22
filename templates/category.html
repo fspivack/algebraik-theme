@@ -6,23 +6,19 @@
 
 {% block content %}
 
-{% set ns = namespace(found=False) %}
-{%- for page in pages %}
-    {%- if page.landing_page_for == category %}
-        {%- set ns.found = True %}
-        {%- if page.landing_page_title %}
-            <div class="blog-hero"><div class="blog-hero-content"><h1>{{ page.landing_page_title }}</h1></div></div>
-        {%- else %}
-            <div class="blog-hero"><div class="blog-hero-content"><h1>Category: {{ category|title }}</h1></div></div>
-        {%- endif %}
-        <div class="main-text">
-        {{ page.content }}
+{% set intro = CATEGORY_CONTENT.get(category.slug) %}
+{%- if intro %}
+    {%- if intro.title %}
+        <div class="blog-hero"><div class="blog-hero-content"><h1>{{ intro.title }}</h1></div></div>
+    {%- else %}
+        <div class="blog-hero"><div class="blog-hero-content"><h1>Category: {{ category|title }}</h1></div></div>
     {%- endif %}
-{%- endfor %}
-{%- if not ns.found %}
-    <div class="blog-hero"><div class="blog-hero-content"><h1>Category: {{ category|title }}</h1></div></div>
     <div class="main-text">
+        <div class="intro-content">{{ intro.content }}</div>
+        {% include 'articles_loop.html' %}
+    </div>
+{%- else %}
+    <div class="blog-hero"><div class="blog-hero-content"><h1>Category: {{ category|title }}</h1></div></div>
+        <div class="main-text">{% include 'articles_loop.html' %}</div>
 {%- endif %}
-            
-{% include 'articles_loop.html' %}</div>
 {% endblock content %}

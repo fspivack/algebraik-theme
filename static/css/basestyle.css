@@ -301,6 +301,9 @@ pre * {
         outline: none;
     }
 }
+.intro-content {
+    margin-bottom: 3rem;
+}
 .content {
     text-align: left;
     /* margin: 1rem auto 5rem auto; */
