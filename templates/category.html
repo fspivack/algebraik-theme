@@ -5,8 +5,24 @@
 {% block extratitle %}Category {{ category.name|title }}{% endblock extratitle %}
 
 {% block content %}
-<div class="blog-hero"><div class="blog-hero-content"><h1>Category: {{ category|title }}</h1></div></div>
 
-<div class="main-text">{% include 'articles_loop.html' %}</div>
+{% set ns = namespace(found=False) %}
+{%- for page in pages %}
+    {%- if page.landing_page_for == category %}
+        {%- set ns.found = True %}
+        {%- if page.landing_page_title %}
+            <div class="blog-hero"><div class="blog-hero-content"><h1>{{ page.landing_page_title }}</h1></div></div>
+        {%- else %}
+            <div class="blog-hero"><div class="blog-hero-content"><h1>Category: {{ category|title }}</h1></div></div>
+        {%- endif %}
+        <div class="main-text">
+        {{ page.content }}
+    {%- endif %}
+{%- endfor %}
+{%- if not ns.found %}
+    <div class="blog-hero"><div class="blog-hero-content"><h1>Category: {{ category|title }}</h1></div></div>
+    <div class="main-text">
+{%- endif %}
+            
+{% include 'articles_loop.html' %}</div>
 {% endblock content %}
-

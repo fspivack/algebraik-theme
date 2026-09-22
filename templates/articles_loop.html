@@ -15,7 +15,7 @@
 {% set ns = namespace(found=False) %}
 {% set articles = articles_page.object_list if articles_page else articles %}
 {%- for article in articles %}
-    {%- if not page or (page.landing_page_for and (page.landing_page_for in article.tags)) %}
+    {%- if not page %}
         {% set ns.found = True %}
         <article class="post-wrap">
             <a href="{{ SITEURL }}/{{ article.url }}">
