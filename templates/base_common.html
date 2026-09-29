@@ -11,29 +11,22 @@
         {%- if SITESUBTITLE %}
             <meta name="description" content="{{ SITESUBTITLE }}" />
         {%- endif %}
-
-        {#
-        <style>
-            {%- include 'css/style.css' %}
-        </style>
-        #}
         
         <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/basestyle.css">
 
-        
-        {%- if ALTERNATIVE_STYLES_FILE %}
-            <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ ALTERNATIVE_STYLES_FILE }}">
-            <style>
-                {%- include 'css/style-option3.css' %}
-            </style>
-        {%- else %}
-            <style>
-                {%- include 'css/style-option1.css' %}
-            </style>
-        {%- endif %}
         <style>
             {%- include 'css/base-configurable.css' %}
         </style>
+        {%- if ALTERNATIVE_STYLES_FILE %}
+            <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ ALTERNATIVE_STYLES_FILE }}">
+        {%- else %}
+            <style>
+                {%- include 'css/styles.css' %}
+            </style>
+        {%- endif %}
+        {%- if EXTRA_STYLES_FILE %}
+            <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ EXTRA_STYLES_FILE }}">
+        {%- endif %}
         {%- if PYGMENTS_FILE %}
             <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/{{ PYGMENTS_FILE }}">
         {%- endif %}

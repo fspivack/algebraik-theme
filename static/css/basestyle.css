@@ -33,7 +33,7 @@ body {
 /*     clear: both; */
 /*     font-size: 1.3rem; /\* for small screens *\/ */
 /* } */
-h1 {
+h1:not(.hero-home h1, .article-hero h1, .blog-hero h1, .hero h1) {
     margin: 0.67rem 0;
     font-size: 1.6rem; /* for small screens */
 }
@@ -227,7 +227,6 @@ pre * {
     }
     .h-menu-items li {
         display: inline-block;
-        padding: 0.8rem;
         /* background-color:{{ menu_bg }}; */
     }
     .h-menu-items a {
@@ -238,8 +237,8 @@ pre * {
         font-weight: bold;
         padding: 0.3rem;
         text-decoration: none;
-        border-style: solid;
-        border-width: 0 0 0.2rem 0;
+        /* border-style: solid; */
+        /* border-width: 0 0 0.2rem 0; */
         font-size: 1.1rem;
         line-height: 1.65rem;
     }
@@ -314,7 +313,13 @@ pre * {
     /* padding-left: 1.5rem; */
     /* padding-right: 1.5rem; */
 }
-.content h2:not(.hero-home h2, .article-hero h2, .blog-hero h2, .hero h2) {
+.content h2:not(
+    .hero-home h2,
+    .article-hero h2,
+    .blog-hero h2,
+    .hero h2,
+    .articles-h-style
+) {
     border-style: solid;
     border-width: 0 0 0.1rem 0;
     /* border-color: {{ heading_col }}; */
@@ -340,13 +345,14 @@ pre * {
     color: {{ heading_col }};
     background-color: {{ heading_bg }};
 } */
-.content img,
+.content img:not(.left-img, .right-img),
 .float-left,
 .float-right,
 .img-container-left,
 .img-container-right,
 .left-img,
 .right-img,
+.center-img,
 .left-img-preserve-size,
 .right-img-preserve-size,
 .figure {
@@ -356,7 +362,7 @@ pre * {
     max-width: 100%; /* Make sure the image does not overflow the container */
 }
 /* todo: Check this! */
-img:after, figure:after {
+img:after, figure:after, .tags:before {
     content: '';
     display: block;
     clear: both;
@@ -371,12 +377,15 @@ img:after, figure:after {
 /*     } */
 /* } */
 @media only screen and (min-width: 33rem) {
-    .content img:not(.right-img, .image-container-right), .left-img, .img-container-left {
+    .content img:not(.right-img, .image-container-right, .center-img), .left-img, .img-container-left {
         float: left;
         margin: 0.5rem 1rem 0.5rem 0;
-        width: 13rem;
+        /* width: 13rem; */
         height: auto;
     }
+    /* .center-img { */
+    /*     width: 25rem; */
+    /* } */
     .right-img, .img-container-right {
         /* Requires 'important' because '#content img' takes precedence */
         display: inline-block;
@@ -533,7 +542,8 @@ img:after, figure:after {
         /* margin: 1rem 6rem 5rem 6rem; */
         position: relative;
         /* Put content below fixed header */
-        top: 4.05rem;
+        /* top: 4.05rem; */
+        /* top: 3.85rem; */
     }
 }
 .no-display {

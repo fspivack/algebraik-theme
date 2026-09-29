@@ -130,8 +130,8 @@
 .{class} {
     text-align: center;
     width: 100%;
-    background-color: {{ get_var(tv, 'menu_col') }};
-    color: {{ get_var(tv, 'menu_bg') }};
+    background-color: {{ get_var(tv, 'heading_bg') }};
+    color: {{ get_var(tv, 'heading_col') }};
     margin: 0 auto 2rem auto;
 
     /* Flexbox info */
@@ -145,6 +145,7 @@
 .{class} h1 {
     font-size: 1.8rem;
     padding: 3rem;
+    margin-top: 5rem;
 }
 .{class} h2 {
     max-width: 45rem;
@@ -169,15 +170,43 @@
     {% elif style == "line" %}
         {% set hero %}
 .{class} {
+    padding: 1.5rem 0;
+    margin: 1rem auto 3.5rem auto;
+    text-align: center;
+}
+/* .{class} h1 { */
+/*     color: {{ get_var(tv, 'heading_col') }}; */
+/* } */
+.{class} h1 {
+    margin: 3rem auto 3.5rem auto;
+    max-width: 45rem;
+    color: {{ get_var(tv, 'menu_bg') }};
+    background-color:  {{ get_var(tv, 'menu_col') }};
+    font-size: 1.8rem;
+    padding: 2rem;
+    margin: 5rem auto 1rem auto;
     border-style: solid;
     border-width: 2px 0;
     border-color: {{ get_var(tv, 'heading_col') }};
-    padding: 1.5rem 0;
-    margin: 0 auto 3.5rem auto;
-    text-align: center;
 }
-.{class} h1 {
-    color: {{ get_var(tv, 'heading_col') }};
+.{class} h2 {
+    max-width: 45rem;
+    margin: 0 auto 0 auto;
+    font-size: 1rem;
+    padding-top: 0.8rem;
+}
+@media only screen and (min-width: 20rem) {
+    .{class} h1 {
+        font-size: 2rem;
+    }
+    .{class} h2 {
+        font-size: 1.2rem;
+    }
+}
+@media only screen and (min-width: 30rem) {
+    .{class} h1 {
+        font-size: 3rem;
+    }
 }
         {% endset %}
     {% endif %}
@@ -212,8 +241,9 @@ main {
 {# Note: The homepage has 'categories' and 'authors' defined, so we cannot separate them
    the homepage from 'categories' #}
 
-{% if page and not page.landing_page_for %}
+{% if page %}
     {{ set_hero('hero', get_var(tv, 'subpage_hero_style')) }}
+    {{ set_hero('blog-hero', get_var(tv, 'blog_hero_style')) }}
 {% elif article %}
     {{ set_hero('article-hero', get_var(tv, 'article_hero_style')) }}
 {# and so we need to do both blog-hero and hero-home #}

@@ -14,7 +14,7 @@
     font-style: normal;
     font-weight: 600;
     font-display: swap;
-    src: url('/theme/fonts/inter/Inter-SemiBold.woff2') format('woff2');
+    src: url('/theme/fonts/inter/Inter-Bold.woff2') format('woff2');
 }
 
 * {
@@ -48,16 +48,44 @@ footer {
 @media only screen and (min-width: 53.125rem) {
     .h-menu-items li {
         background-color:{{ get_var(tv, 'menu_bg') }};
+        {%- if get_var(tv, 'menu_border') == "True" %}
+            padding: 0.8rem;
+        {%- else %}
+            height: 100%;
+        {%- endif %}
     }
     .h-menu-items a {
         background-color: {{ get_var(tv, 'menu_bg') }};
         color: {{ get_var(tv, 'menu_col') }};
+        {%- if get_var(tv, 'menu_border') == "True" %}
+            border-style: solid;
+            border-width: 0 0 0.2rem 0;
+        {%- else %}
+            height: 100%;
+            padding: 1rem;
+        {%- endif %}
     }
     .h-menu-items a:not(.active-menu-item) {
         border-color: {{ get_var(tv, 'menu_bg') }};
     }
-    .h-menu-items a:hover, .h-menu-items a:focus, .active-menu-item {
-        border-color: {{ get_var(tv, 'menu_col') }};
+    .active-menu-item {
+        {%- if get_var(tv, 'menu_border') == "True" %}
+            border-color: {{ get_var(tv, 'menu_col') }};
+        {%- else %}
+            /* background-color: {{ get_var(tv, 'hover_bg') }}; */
+            /* border-color: {{ get_var(tv, 'menu_col') }}; */
+            text-decoration: underline !important;
+            text-underline-offset: 0.5rem;
+        {%- endif %}
+    }
+    .h-menu-items a:hover, .h-menu-items a:focus {
+        {%- if get_var(tv, 'menu_border') == "True" %}
+            border-color: {{ get_var(tv, 'menu_col') }};
+            border-style: dotted;
+        {%- else %}
+            background-color: {{ get_var(tv, 'hover_bg') }};
+            /* border-color: {{ get_var(tv, 'menu_col') }}; */
+        {%- endif %}
     }
 }
 .v-menu-items li {
@@ -124,3 +152,14 @@ footer {
         }
     }
 {% endif %}
+
+@media only screen and (min-width: 33rem) {
+    .content img:not(.right-img, .image-container-right, .center-img),
+    .left-img,
+    .img-container-left,
+    .center-img,
+    .right-img,
+    .img-container-right {
+        width: {{ get_var(tv, 'default_img_width') }};
+    }
+}

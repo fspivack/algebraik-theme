@@ -1,0 +1,545 @@
+/* Breakpoints and tweakpoints */
+/* 20rem */
+/* 27rem */
+/* 30rem */
+/* 33rem */
+/* 53.125rem */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: {{ font_stack }}; */
+    scroll-behavior: smooth;
+}
+html {
+    width: 100%;
+}
+body {
+    width: 100%;
+    /* Only small screens */
+    text-align: right; /* to align buttons, e.g. "back to top" correctly */
+    position: relative;
+    /* Deal with the possiibility of words overflowing the screen on small screens */
+    overflow-wrap: break-word;
+    word-wrap: break-word; /* for older browsers */
+}
+/* h1:not(.hero-home h1, .article-hero h1, .blog-hero h1, .hero h1) { */
+/*     margin: 0.67rem 0; */
+/*     font-size: 1.6rem; /\* for small screens *\/ */
+/* } */
+/* h2:not(.hero-home h2, .article-hero h2, .blog-hero h2, .hero h2) { */
+/*     margin: 0.83rem 0; */
+/*     clear: both; */
+/*     font-size: 1.3rem; /\* for small screens *\/ */
+/* } */
+h1:not(.hero-home h1, .article-hero h1, .blog-hero h1, .hero h1) {
+    margin: 0.67rem 0;
+    font-size: 1.6rem; /* for small screens */
+}
+h2 {
+    margin: 0.83rem 0;
+    clear: both;
+    font-size: 1.3rem; /* for small screens */
+}
+h3 {
+    margin: 1rem 0;
+}
+h4 {
+  margin: 1.33rem 0;
+}
+p {
+  margin: 1rem 0;
+  line-height: 130%;
+}
+@media only screen and (min-width: 30rem) {
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.5rem;
+    }
+}
+/* #content a:not(.tags a):not(.small-info a) { */
+/*     color: {{ hamburger_menu_col }}; */
+/* } */
+/* #content a:active:not(article a:active), */
+/* #content a:focus:not(article a:focus), */
+/* #content a:hover:not(article a:hover) { */
+/*     color: {{ focus_col }}; */
+/* } */
+footer {
+    /* background-color: {{ footer_bg }}; */
+    /* color: {{ footer_col }}; */
+    padding: 0.2rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+}
+/* The following resets button styles to be like a div */
+button {
+    display: inline-block;
+    border: none;
+    margin: 0;
+    padding: 0;
+    font-family: open_sansregular, sans-serif;
+    font-size: 1rem;
+    line-height: 1;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+/* For code blocks */
+pre {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    /* padding: 10px; */
+    padding: 0.4rem;
+    overflow: auto;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+pre * {
+    font-family: monospace;
+    line-height: 1.75;
+}
+.footer-left {
+    display: inline-block;
+    text-align: left;
+}
+.footer-right {
+    display: inline-block;
+    flex-align: right;
+}
+.footer-centre {
+    display: inline-block;
+    text-align: center;
+}
+/* Based on: https://www.makethingsaccessible.com/guides/creating-a-skip-to-content-link/ */
+/* Set some base styles, so it is easy to see */
+.skip-link {
+    position: absolute;
+    display: inline-block;
+    padding: .375rem .75rem;
+    line-height: 1;
+    font-size: 1.25rem;
+    /* background-color: {{ skip_link_bg }}; */
+    /* color: {{ skip_link_col }}; */
+    top: 0;
+    left: 0;
+    transition: transform 250ms ease-in;
+    /* Needs to be 'z-index: 2' because header is 'z-index: 1' */
+    z-index: 2;
+    text-decoration: none;
+    outline: none;
+}
+/* When it is not focused, transform its Y position by its total height, using a negative value, so it hides above the viewport */
+.skip-link:not(:focus) {
+    transform: translateY(-5rem);
+}
+.skip-link:focus {
+    transform: none;
+    top: 0;
+    left: 0;
+}
+.footer-inner {
+    padding: 0 0.4rem;
+    display: flex; /* allow multiple parts */
+    flex-direction: row;
+}
+/* #top-logo { */
+/*     height: 3rem; */
+/*     width: auto; */
+/*     position: absolute; */
+/*     top: 0; */
+/*     left: 0; */
+/*     z-index: 1; */
+/* } */
+/* @media only screen and (min-width: 20rem) { */
+/*     #top-logo { */
+/*         height: 6rem; */
+/*         margin: 0.5rem; */
+/*     } */
+/* } */
+.top-container {
+    /* Need this z-index so that we can access menu above raised 'main-anchor' section */
+    z-index: 1;
+    /* And we need this so z-index will work */
+    position: relative;
+    /* height: 3rem; */
+    text-align: left; /* to counter 'text-align: right' in 'body' */
+    display: flex;
+}
+@media only screen and (min-width: 20rem) {
+    .top-container {
+        /* height: 7.5rem; */
+    }
+}
+.top {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    /* background-color: {{ menu_bg }}; */
+}
+@media only screen and (min-width: 53.125rem) {
+    .top {
+        /* border-width: 0.19rem 0 0.19rem 0; */
+        position: fixed;
+        top: 0;
+    }
+}
+.menu {
+    /* Only very small screens */
+    height: 3rem;
+    text-align: right; /* Why did I do this?  Answer: for the hamburger button*/
+}
+@media only screen and (min-width: 20rem) { 
+    .menu {
+        /* Only smaller screens: */
+        height: 4.05rem;
+    }
+}
+@media only screen and (min-width: 53.125rem) {
+    .menu {
+        /* The following two properties make sure the menu is always visible, without wrapping */
+        overflow: auto;
+        height: 100%;
+        text-align: center;
+    }
+}
+.h-menu-wrapper {
+    margin: 0 7.5rem;
+}
+/* HORIZONTAL MENU */
+.h-menu-items {
+    /* Only small screens: */
+    display: none;
+}
+@media only screen and (min-width: 53.125rem) {
+    .h-menu-items {
+        display: inline-block;
+        list-style-type: none;
+        white-space: nowrap;
+    }
+    .h-menu-items li {
+        display: inline-block;
+        /* background-color:{{ menu_bg }}; */
+    }
+    .h-menu-items a {
+        display: inline-block;
+        /* background-color: {{ menu_bg }}; */
+        /* color: {{ menu_col }}; */
+        text-decoration: none;
+        font-weight: bold;
+        padding: 0.3rem;
+        text-decoration: none;
+        /* border-style: solid; */
+        /* border-width: 0 0 0.2rem 0; */
+        font-size: 1.1rem;
+        line-height: 1.65rem;
+    }
+    .h-menu-items a:not(.active-menu-itrem) {
+        /* border-color: {{ menu_bg }}; */
+    }
+    .h-menu-items a:hover, .h-menu-items a:focus, .active-menu-itrem {
+        outline: none; /* override defualt */
+        /* border-color: {{ menu_col }}; */
+    }
+}
+/* END HORIZONTAL MENU */
+/* VERTICAL MENU */
+.v-menu-items {
+    display: none;
+    text-align: center;
+    list-style-type: none;
+    width: 100%;
+}
+.v-menu-items li {
+    display: inline-block;
+    /* background-color: {{ hamburger_menu_bg }}; */
+    width: 100%;
+}
+.v-menu-items a {
+    display: inline-block;
+    width: 100%;
+    /* background-color:  {{ hamburger_menu_bg }}; */
+    /* color: {{ hamburger_menu_col }}; */
+    padding: 1rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+.v-menu-items a:hover, .v-menu-items a:focus {
+    text-decoration: none;
+    /* background-color: {{ hamburger_hover_bg }}; */
+    /* color:  {{ hamburger_hover_col }}; */
+}
+@media only screen and (min-width: 53.125rem) {
+    .v-menu-items {
+        display: none;
+    }
+}
+/* END VERTICAL MENU */
+/* todo: Rename 'main-style' class */
+/*
+    Note: we use a class rather than id #main-content to separate style from
+    function
+*/
+@media only screen and (min-width: 53.125rem) {
+    .style-main {
+        position: relative; /* needed for 'top' to work */
+        /* top: -5.5rem; */
+        /*z-index: -1; /* make sure we can access menu over the top of this */
+    }
+    .style-main:focus {
+        border: none;
+        outline: none;
+    }
+}
+.intro-content {
+    margin-bottom: 3rem;
+}
+.content {
+    text-align: left;
+    /* margin: 1rem auto 5rem auto; */
+    /* padding: 0 2rem; */
+    min-height: calc(100vh - 11.8rem);  /* Put footer at bottom */
+    min-height: 100vh;
+    /* max-width: 45rem; */
+    /* padding-left: 1.5rem; */
+    /* padding-right: 1.5rem; */
+}
+.content h2:not(.hero-home h2, .article-hero h2, .blog-hero h2, .hero h2) {
+    border-style: solid;
+    border-width: 0 0 0.1rem 0;
+    /* border-color: {{ heading_col }}; */
+    padding-bottom: 0.7rem;
+    margin-bottom: 1rem;
+}
+/* #content h1, h2, h3, h4 {
+    color: {{ heading_col }};
+    background-color: {{ heading_bg }};
+} */
+.content ul, .content ol {
+    margin: 0 2rem;
+}
+@media only screen and (min-width: 20rem) {
+    .content ul, .content ol {
+        margin: 0 2.5rem;
+    }
+}
+.content li {
+    margin: 0.75rem 0;
+}
+/* #content li::marker {
+    color: {{ heading_col }};
+    background-color: {{ heading_bg }};
+} */
+.content img:not(.left-img, .right-img),
+.float-left,
+.float-right,
+.img-container-left,
+.img-container-right,
+.left-img,
+.right-img,
+.center-img,
+.left-img-preserve-size,
+.right-img-preserve-size,
+.figure {
+    float: none;
+    display: block;
+    margin: 2rem auto; /* Center the image and add bottom margin */
+    max-width: 100%; /* Make sure the image does not overflow the container */
+}
+/* todo: Check this! */
+img:after, figure:after, .tags:before {
+    content: '';
+    display: block;
+    clear: both;
+}
+/* /\* Possibly remove this *\/ */
+/* @media only screen and (min-width: 27rem) { */
+/*     /\* Tweak point *\/ */
+/*     #content img { */
+/*         width: 80%; */
+/*         margin-left: auto; */
+/*         margin-right: auto; */
+/*     } */
+/* } */
+@media only screen and (min-width: 33rem) {
+    .content img:not(.right-img, .image-container-right, .center-img), .left-img, .img-container-left {
+        float: left;
+        margin: 0.5rem 1rem 0.5rem 0;
+        /* width: 13rem; */
+        height: auto;
+    }
+    /* .center-img { */
+    /*     width: 25rem; */
+    /* } */
+    .right-img, .img-container-right {
+        /* Requires 'important' because '#content img' takes precedence */
+        display: inline-block;
+        float: right;
+        margin: 0.5rem 0.5rem 1rem;
+        width: 13rem;
+        height: auto
+    }
+    /* todo: Check this! */
+img:after, figure:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+}
+/* @media only screen and (min-width: 53.125rem) { */
+/*     #content { */
+/*         /\* margin: 1rem 6rem 5rem 6rem; *\/ */
+/*         /\* Account for 'main-anchor' being higher than we want this *\/ */
+/*         position: relative; */
+/*         top: 5.5rem; */
+/*     } */
+/* } */
+/* END CONTENT */
+.landing-page-content {
+    margin-bottom: 3em;
+    padding-bottom: 2rem;
+}
+.back-to-top {
+    font-weight: bold;
+    position: fixed;  /* for older browsers */
+    position: -webkit-sticky;  /* for Safari */
+    position: sticky;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.6rem;
+    border-radius: 1rem;
+    display: none; 
+}
+/* #back-to-top:not(:focus) {
+    background-color:{{ button_bg }};
+    color: {{ button_col }};
+} */
+.theme-wrapper {
+    position: fixed;
+    height: 5rem;
+}
+.change-theme {
+    /* background-color: {{ button_bg }}; */
+    /* color: {{ button_col }}; */
+    font-weight: bold;
+    position: fixed;  /* for older browsers */ /* Necessary?? */
+    position: -webkit-sticky;  /* for Safari */
+    position: sticky;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 0.6rem;
+    border-radius: 0.3rem;
+}
+.theme-change {
+    position: fixed;
+    top: 0;
+    right: 0;
+    /* background-color: {{ top_bg }}; */
+    /* color: {{ top_col }}; */
+    display: block;
+}
+.back-to-top:focus, .change-theme:focus {
+    outline: none;
+    /* Override default styling of button */
+    box-shadow: none;
+    /* background-color: {{ top_bg }}; */
+    /* color: {{ top_col }}; */
+}
+.red-error {
+    background-color: #C70039;
+}
+.hambrg-bttn {
+    font-weight: bold;
+    display: inline-block;
+    height: 100%;
+    /* background-color: {{ hamburger_menu_bg }}; */
+    /* color: {{ hamburger_menu_col }}; */
+}
+.hambrg-icon {
+    height: 100%;
+    pointer-events: none;
+    tabindex: -1
+}
+.hambrg-img {
+    height: 100%;
+}
+@media only screen and (min-width: 53.125rem) {
+    .hambrg-bttn {
+        display: none;
+    }
+}
+
+.flexcontainer {
+    display: flex;
+    flex-direction: row;
+}
+.flex-text {
+    display: block;
+    width: 100%;
+}
+@media only screen and (min-width: 33rem) {
+    .flex-text {
+        width: calc(100% - 8rem);
+        flex: 1;
+    }
+}
+.post-thumbnail {
+    width: 100%;
+    align-self: start; /* maintains aspect ratio (default is 'stretch') */
+    display: block;
+}
+@media only screen and (min-width: 33rem) {
+    .post-thumbnail {
+        width: 10rem !important; /* requires 'important' to override '#content img' */
+        margin: 1rem !important; /* align with text */
+    }
+}
+@media only screen and (min-width: 37.5rem) {
+    .figure {
+        float: left;
+        margin: 0.5rem 1rem 0.5rem 0;
+        width: 15rem;
+        height: auto;
+    }
+}
+.figure img, .figure p {
+    margin: 0 !important; /* Overrides '#content img' */
+}
+.caption {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    font-size: 0.8rem;
+    padding: 0.4rem;
+}
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+@media only screen and (min-width: 53.125rem) {
+    /* #content { */
+    .content {
+        /* margin: 1rem 6rem 5rem 6rem; */
+        position: relative;
+        /* Put content below fixed header */
+        /* top: 4.05rem; */
+        /* top: 3.85rem; */
+    }
+}
+.no-display {
+    display: none;
+}

@@ -43,6 +43,11 @@
 
         'hero_heading_bg': v.get('hero_heading_bg', 'rgba(0, 0, 0, 0.4)'),
         'hero_heading_col': v.get('hero_heading_col', 'white'),
+        'hover_bg': v.get('hover_bg', 'blue'),
+
+        'menu_border': v.get('menu_border', False),
+
+        'default_img_width': v.get('default_img_width', '25rem'),
     } %}
     {{- theme[var] -}}
 {% endmacro %}
