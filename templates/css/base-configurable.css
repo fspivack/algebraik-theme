@@ -1,5 +1,6 @@
 {% from 'css/vars.css' import get_var %}
 {% set tv = THEME_CSS_VARS %}
+{% set tev = THEME_EXTRA_VARS %}
 
 @font-face {
     font-family: 'Inter';
@@ -49,7 +50,7 @@ footer {
 @media only screen and (min-width: 53.125rem) {
     .h-menu-items li {
         background-color:{{ get_var(tv, 'menu_bg') }};
-        {%- if get_var(tv, 'menu_border') == "True" %}
+        {%- if get_var(tev, 'menu_border') == "True" %}
             padding: 0.8rem;
         {%- else %}
             height: 100%;
@@ -58,7 +59,7 @@ footer {
     .h-menu-items a {
         background-color: {{ get_var(tv, 'menu_bg') }};
         color: {{ get_var(tv, 'menu_col') }};
-        {%- if get_var(tv, 'menu_border') == "True" %}
+        {%- if get_var(tev, 'menu_border') == "True" %}
             border-style: solid;
             border-width: 0 0 0.2rem 0;
         {%- else %}
@@ -70,7 +71,7 @@ footer {
         border-color: {{ get_var(tv, 'menu_bg') }};
     }
     .active-menu-item {
-        {%- if get_var(tv, 'menu_border') == "True" %}
+        {%- if get_var(tev, 'menu_border') == "True" %}
             border-color: {{ get_var(tv, 'menu_col') }};
         {%- else %}
             /* background-color: {{ get_var(tv, 'hover_bg') }}; */
@@ -80,7 +81,7 @@ footer {
         {%- endif %}
     }
     .h-menu-items a:hover, .h-menu-items a:focus {
-        {%- if get_var(tv, 'menu_border') == "True" %}
+        {%- if get_var(tev, 'menu_border') == "True" %}
             border-color: {{ get_var(tv, 'menu_col') }};
             border-style: dotted;
         {%- else %}
@@ -145,7 +146,7 @@ footer {
     left: 0;
     z-index: 1;
 }
-{% if get_var(tv, 'fit_logo') == "False" %}
+{% if get_var(tev, 'fit_logo') == "False" %}
     @media only screen and (min-width: 33rem) {
         .top-logo {
             height: 6rem;

@@ -1,5 +1,6 @@
 {% from 'css/vars.css' import get_var %}
 {% set tv = THEME_CSS_VARS %}
+{% set tev = THEME_EXTRA_VARS %}
 
 {% macro set_hero(class, style) %}
     {% if style == "hero_img" %}
@@ -242,15 +243,15 @@ main {
    the homepage from 'categories' #}
 
 {% if page %}
-    {{ set_hero('hero', get_var(tv, 'subpage_hero_style')) }}
-    {{ set_hero('blog-hero', get_var(tv, 'blog_hero_style')) }}
+    {{ set_hero('hero', get_var(tev, 'subpage_hero_style')) }}
+    {{ set_hero('blog-hero', get_var(tev, 'blog_hero_style')) }}
 {% elif article %}
-    {{ set_hero('article-hero', get_var(tv, 'article_hero_style')) }}
+    {{ set_hero('article-hero', get_var(tev, 'article_hero_style')) }}
 {# and so we need to do both blog-hero and hero-home #}
 {% elif category or tag or author %}
-   {{ set_hero('blog-hero', get_var(tv, 'blog_hero_style')) }}
+   {{ set_hero('blog-hero', get_var(tev, 'blog_hero_style')) }}
 {% else %} {# Then it is the homepage (or categories or authors) #}
-    {{ set_hero('hero-home', get_var(tv, 'home_hero_style')) }}
+    {{ set_hero('hero-home', get_var(tev, 'home_hero_style')) }}
     
 {% endif %}
 
