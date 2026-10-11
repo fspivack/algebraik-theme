@@ -36,10 +36,10 @@
         'font_stack': v.get('font_stack', default_font_stack),
         'fit_logo': v.get('fit_logo', True),
 
-        'home_hero_style': v.get('home_hero_style', 'home'),
-        'subpage_hero_style': v.get('subpage_hero_style', 'subpage'),
-        'blog_hero_style': v.get('blog_hero_style', 'blog'),
-        'article_hero_style': v.get('article_hero_style', 'article'),
+        'home_hero_style': v.get('home_hero_style', 'hero_img'),
+        'subpage_hero_style': v.get('subpage_hero_style', 'block'),
+        'blog_hero_style': v.get('blog_hero_style', 'plain'),
+        'article_hero_style': v.get('article_hero_style', 'plain'),
 
         'hero_heading_bg': v.get('hero_heading_bg', 'rgba(0, 0, 0, 0.4)'),
         'hero_heading_col': v.get('hero_heading_col', 'white'),

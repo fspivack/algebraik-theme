@@ -32,6 +32,7 @@
 .content a:focus:not(article a:focus),
 .content a:hover:not(article a:hover) {
     color: {{ get_var(tv, 'focus_col') }};
+    background-color: {{ get_var(tv, 'focus_bg') }};
 }
 footer {
     background-color: {{ get_var(tv, 'footer_bg') }};
