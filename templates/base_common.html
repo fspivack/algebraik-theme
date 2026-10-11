@@ -79,12 +79,27 @@
                     {%- include 'menu.html' %}
                 </ul>
                 </div>
+                <!-- <button type="button" aria-pressed="false" onclick="toggleMenu();" -->
+                <!--         aria-label="Toggle menu" class="hambrg-bttn"> -->
+                <!--     <object class="hambrg-icon" data="{{ SITEURL }}/theme/images/hamburger.svg" tabindex="-1" -->
+                <!--              type="image/svg+xml" aria-hidden="true"> -->
+                <!--         <img src="{{ SITEURL }}/theme/images/hamburger.png" class="hambrg-img"  alt="Hamburger image"> -->
+                <!--     </object> -->
+                <!-- </button> -->
+
                 <button type="button" aria-pressed="false" onclick="toggleMenu();"
                         aria-label="Toggle menu" class="hambrg-bttn">
-                    <object class="hambrg-icon" data="{{ SITEURL }}/theme/images/hamburger.svg" tabindex="-1"
-                             type="image/svg+xml" aria-hidden="true">
-                        <img src="{{ SITEURL }}/theme/images/hamburger.png" class="hambrg-img"  alt="Hamburger image">
-                    </object>
+                    <svg version="1.1"
+                         baseProfile="full"
+                         viewBox="0 0 230 220"
+                         xmlns="http://www.w3.org/2000/svg">
+
+                        <rect x="20" y="40" rx="10" ry="10" width="190" height="20" fill="currentColor" stroke="currentColor" />
+
+                        <rect x="20" y="100" rx="10" ry="10" width="190" height="20" fill="currentColor" stroke="currentColor" />
+
+                        <rect x="20" y="160" rx="10" ry="10" width="190" height="20" fill="currentColor" stroke="currentColor" />
+                    </svg>
                 </button>
                 <ul class="v-menu-items v-menu">
                     {%- include 'menu.html' %}

@@ -14,13 +14,6 @@
     For each menu item in MENUITEMS
         - Display each menu item
         - Set aria-current to page and highlight menu link, if on that page
-        - Set aria-current to location and highlight menu link, if on subpage or article which has it as landing_page
-    If config says DISPLAY_LANDING_PAGES_ON_MENU
-        - Display each landing page
-        - Use the pages menuname if it exists in the metadata
-        - Otherwise use the page's title, titlezing if TITLEIZE_MENU is true
-        - Set aria-current to page and highlight menu link, if on that page
-        - Set aria-current to location and highlight menu link, if on article which it as a landing page
     If DISPLAY_CATEGORIES_ON_MENU
         - Display each category page
         - Use the pages menuname if it exists in the metadata
@@ -54,7 +47,7 @@
 {%- endif %}
 {%- if DISPLAY_PAGES_ON_MENU != False %}{# Defaults to "True" #}
     {%- for p in pages -%}
-        {%- if p.home != 'True' and not p.landing_page_for and not p.archive_page_for %}
+        {%- if p.home != 'True' %}
             {# Don't include homepage in pages menu links unless requested - user can manually
             put homepage menu link. Similarly landing pages and tag-specific archive pages -#}
             <li><a href="{{ SITEURL }}/{{ p.url }}"
@@ -79,15 +72,6 @@
 {%- endif %}
 {%- for name, link in MENUITEMS -%}
     <li><a href="{{ link }}"
-       {%- for p in pages -%}
-            {# The following bit sets the menu link to active if it is a
-            landing page for an article type which the user is on #}
-            {%- if normalise_url(link) == normalise_url(p.url) -%}
-                {%- if article and p.landing_page_for in article.tags %}
-                    aria-current="location" class="active-menu-item"
-                {%- endif %}
-            {%- endif %}
-        {%- endfor %}
         {%- if page and normalise_url(page.url).startswith(normalise_url(link)) %}
             aria-current="location" class="active-menu-item"
         {%- endif %}
@@ -105,26 +89,6 @@
         >{{ name }}
     </a></li>
 {%- endfor %}
-{%- if DISPLAY_LANDING_PAGES_ON_MENU %}{# Defaults to "False" #}
-    {%- for lp in pages|selectattr("landing_page_for") -%}
-        <li><a href="{{ SITEURL }}/{{ lp.url }}"
-            {%- if (page and page.url == lp.url) %}
-                aria-current="page" class="active-menu-item"
-            {%- elif article and lp.landing_page_for in article.tags %}
-                    aria-current="location" class="active-menu-item"
-            {%- endif %}>
-            {%- if lp.menuname %}
-                {# Assume user will put capitalisations as they wish in 'menuname' #}
-                {{ lp.menuname }}
-            {%- else %}
-                {%- if TITLEIZE_MENU == False -%}
-                    {{ lp.title }}
-                {%- else %}
-                    {{ lp.title|title }}
-                {%- endif %}
-            {%- endif %}</a></li>
-    {%- endfor %}
-{%- endif -%}
 {%- if DISPLAY_CATEGORIES_ON_MENU != False %}{# Defaults to "True" #}
     {%- for cat, _ in categories -%}
         <li><a href="{{ SITEURL }}/{{ cat.url }}"

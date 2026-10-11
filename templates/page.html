@@ -13,11 +13,6 @@
     {% endif %}
 </div></div>
 <div class="main-text">
-    {% if page.blog_landing_page == 'True' %}
-        <section id="landing-page-content">{{ page.content }}</section>
-        {% include 'articles_loop.html' %}
-    {% else %}
-        {{ page.content }}
-    {% endif %}
+    {{ page.content }}
 </div></div>
 {% endblock content %}
