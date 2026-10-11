@@ -6,7 +6,9 @@
 
 {% block content %}
 
-{% set intro = CATEGORY_CONTENT.get(category.slug) %}
+{%- if CATEGORY_CONTENT %}
+    {% set intro = CATEGORY_CONTENT.get(category.slug) %}
+{%- endif %}
 {%- if intro %}
     {%- if intro.title %}
         <div class="blog-hero"><div class="blog-hero-content"><h1>{{ intro.title }}</h1></div></div>

@@ -11,6 +11,9 @@
         'hmbg_menu_col': v.get('hmbg_menu_col', v.get('heading_bg', 'white')),
         'hmbg_hover_bg': v.get('hmbg_hover_bg', v.get('menu_bg', '#2e79a3')),
         'hmbg_hover_col': v.get('hmbg_hover_col', v.get('menu_col', 'white')),
+
+        'menu_hover_bg': v.get('menu_hover_bg', v.get('heading_col', '#173e53')),
+        'menu_hover_col': v.get('menu_hover_col', v.get('heading_bg', 'white')),
                           
         'button_col': v.get('button_col', v.get('heading_bg', 'white')),
         'button_bg': v.get('button_bg', v.get('heading_col', '#173e53')),
@@ -43,7 +46,6 @@
 
         'hero_heading_bg': v.get('hero_heading_bg', 'rgba(0, 0, 0, 0.4)'),
         'hero_heading_col': v.get('hero_heading_col', 'white'),
-        'hover_bg': v.get('hover_bg', 'blue'),
 
         'menu_border': v.get('menu_border', False),
 

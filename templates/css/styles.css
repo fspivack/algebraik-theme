@@ -7,7 +7,7 @@
         {% set hero %}
 .{class} {
     height: 70vh;
-    background-image: url('{{ SITEURL }}/hero_img.jpeg');
+    background-image: url('{{ SITEURL }}/{{ HERO_IMAGE}}');
     background-size: cover;         /* crop to fill area */
     background-position: center;    /* keep main subject centred */
     background-repeat: no-repeat;

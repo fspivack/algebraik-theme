@@ -19,7 +19,7 @@
 }
 
 * {
-    font-family: {{ get_var(tv, 'font_stack') }};
+    font-family: {{ get_var(tev, 'font_stack') }};
 }
 .content {
     background-color: {{ get_var(tv, 'main_bg') }};
@@ -85,7 +85,8 @@ footer {
             border-color: {{ get_var(tv, 'menu_col') }};
             border-style: dotted;
         {%- else %}
-            background-color: {{ get_var(tv, 'hover_bg') }};
+            background-color: {{ get_var(tv, 'menu_hover_bg') }};
+            color: {{ get_var(tv, 'menu_hover_col') }};
             /* border-color: {{ get_var(tv, 'menu_col') }}; */
         {%- endif %}
     }
