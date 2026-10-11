@@ -127,7 +127,7 @@ You then need to specify it in your pelicanconf.py. For example, if you clone it
 THEME = "themes/algebraik-theme"
 ```
 
-To completely customise your website in terms of colours, the only thing you need to do is set `menu_bg`, `menu_col`, `heading_bg` and `heading_col` in `THEME_CSS_VARS`, like so:
+To completely customise your website in terms of colours, the minimum you need to do is set `menu_bg`, `menu_col`, `heading_bg` and `heading_col` in `THEME_CSS_VARS`, like so:
 ```
 THEME_CSS_VARS = {
     'menu_bg': '#914e8e',
