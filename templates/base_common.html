@@ -101,7 +101,9 @@
 
     <main tabindex="-1" id="main-anchor" class="style-main">
         <div class="content content-styles">
+            {%- include 'extra_top.html' ignore missing %}
             {%- block content %}{%- endblock content %}
+            {%- include 'extra_bottom.html' ignore missing %}
         </div>
     </main>
     <div style="clear: both;"></div><!-- Make sure floats don't overlap the footer -->

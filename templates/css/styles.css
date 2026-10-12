@@ -179,7 +179,6 @@
 /*     color: {{ get_var(tv, 'heading_col') }}; */
 /* } */
 .{class} h1 {
-    margin: 3rem auto 3.5rem auto;
     max-width: 45rem;
     color: {{ get_var(tv, 'menu_bg') }};
     background-color:  {{ get_var(tv, 'menu_col') }};

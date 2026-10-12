@@ -10,7 +10,7 @@ In Pelican, the homepage of the website uses the index.html template. In this th
 
 The template will then read the contents of that page and put it on the homepage. (Note that, where DISPLAY_PAGES_ON_MENU is set to True, those pages won't include the page with home set to True. It will, however, be put in the menu as the homepage if DISPLAY_HOME_ON_MENU isn't set to False.)
 
-By default, the homepage will be set to include a list of all articles (in reverse chronological order).
+By default, the homepage will be set to include a list of all articles (in reverse chronological order), although this can be overridden.
 
 To avoid generating a duplicate page with the same content as the homepage, put the metadata `:save_as: `, and leave it blank. This supresses creating a specifc page for the homepage content, separate from the actual homepage.
 
@@ -26,7 +26,9 @@ For articles, you can specify `:cover_img: <path/to/img>` to refer to an image y
 
 In addition to the standard settings, which you can access at [Pelican's settings page](https://docs.getpelican.com/en/latest/settings.html), this theme has a few custom settings. (None of them are required, but if you want to customise your website, you will want to use a few of these, particularly the colour options.)
 
-- `ALIGN_WITH_PICTURE`: If set to True, this makes articles without cover images have a space where the cover image should go, so as to align with articles which do have a picture.
+- `SITESUBTITLE`: An optional string to be used as the `description` html metadata.
+
+- `ALIGN_WITH_PICTURE`: If set to True, this makes articles without cover images have a space where the cover image should go, so as to align with articles which do have one.
 
 - `CR_AUTHOR`: The author to list as copyright holder. You can set this to `SITENAME`, if you want that as the copyright holder.
 
@@ -44,15 +46,42 @@ In addition to the standard settings, which you can access at [Pelican's setting
 
 - `NO_POSTS_MESSAGE`: Set this to a message you would like to display, wherever a list of articles would be, if you have no articles yet. If you don't set this, it will be set to "No posts yet!".
 
-- `LOGO_SVG`: Set this to the location of an SVG file of your logo, if you want it displayed to the left of the menu bar. If it exists, it is also used for the favicon.
+- `ICON_SVG`: Set this to the location of an SVG file to be used as a favicon.
 
-- `LOGO_PNG`: Set this to the location of a PNG file of your logo to use to the left of the menu bar, and as a favicon. This is used only if `LOGO_SVG` isn't set.
+- `ICON_PNG`: Set this to the location of a PNG file to be used as a favicon, provided `ICON_SVG` is not set.
+
+- `LOGO_SVG`: Set this to the location of an SVG file of your logo, if you want it displayed to the left of the menu bar.
+
+- `LOGO_PNG`: Set this to the location of a PNG file of your logo to use to the left of the menu bar. This is used only if `LOGO_SVG` isn't set.
 
 - `HERO_IMAGE`: The location (relative to the site root) of your chosen image for the hero, if you choose to have a hero image
+
+- `CATEGORY_CONTENT`: This is a dictionary designed for overriding the defaults for a category page. See the section on [CATEGORY_CONTENT](#category_content)
 
 - `THEME_CSS_VARS`: This is where you can specify how to customise the theme, in terms of CSS colours. See the section on [THEME_CSS_VARS](#theme_css_vars)
 
 - `THEME_EXTRA_VARS`: This is where you can specify non-colour related settings for the CSS. See the section on [THEME_EXTRA_VARS](#theme_extra_vars)
+
+## CATEGORY_CONTENT
+
+The purpose of this setting is to allow a category to become a kind of "subblog".
+
+Suppose you want a blog about football to have its own page. The obvious thing to do is to make all posts on that topic have football as a category. You can then link the category page for that topic on the menu (or however you want users to navigate to it).
+
+There are two problems:
+1. The main heading would be something like "Category: Football".
+2. You may want to put a paragraph or so at the top to introduce the subblog.
+
+You can override the normal formatting of a category page by adding the following to your pelicanconf.py:
+```
+CATEGORY_CONTENT = {
+    "football": {
+        "title": "Football Blog",
+        "content": "Hello, and welcome to my blog!"
+    }
+}
+```
+The title will replace "Category: Football" and the content will be added before the articles.
 
 ## THEME_CSS_VARS
 
@@ -118,6 +147,12 @@ You can add custom styles to the CSS by specifying `EXTRA_STYLES_FILE` in the se
 
 You can completely replace the CSS in styles.css by specifying `ALTERTNATIVE_STYLES_FILE`. The base styles will still apply. I intend to put a template which you can use to specify the relevant alternative styles.
 
+## Adding to and overriding templates
+
+In Pelican, you can add your own templates, which can either be extra (and which you can use for a particular page or article by specifying the `:template:` metadata), or overrides (for instance, you can create `article.html` which, if put in the appropriate place, will override the theme's `article.html`).
+
+Additionally, this theme allows two optional templates: `extra_top.html` and `extra_bottom.html`. If provided, the contents of these templates will be added at the top and bottom respectively of the content section on all pages.
+
 ## How to use
 
 If you have a Pelican project, you can clone this repo into a subdirectory of your project.
@@ -136,3 +171,22 @@ THEME_CSS_VARS = {
     'heading_col': '#482747',
 }
 ```
+
+You will also want to either set the value of `HERO_IMAGE` to your chosen image, or set `home_hero_style` to something other than `hero_img`, for example:
+```
+THEME_EXTRA_VARS = {
+    'home_hero_style': 'block'
+}
+```
+
+## Coming soon
+
+A dark theme will be implemented by adding a setting `THEME_CSS_VARS_DARK`. It will function in exactly the same way as the regular colour options.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+## Contact
+
+If you'd like to get in touch, please feel free to contact me at spivack.f@gmail.com.
