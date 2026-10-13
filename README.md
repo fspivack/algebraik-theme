@@ -129,7 +129,7 @@ This is where you customise the rest of the theme CSS. It is also a dictionary. 
 - `subpage_hero_style`: Style of the hero on subpages. Defaults to `block`
 - `blog_hero_style`: Style of the hero on blog pages (such as a category page, a tags page etc.). Defaults to `plain`
 - `article_hero_style`: Style of the hero on article pages. Defaults to `plain`
-- `menu_border`: Whether or not to use the border style of menu. (Defaults to False)
+- `menu_border`: Whether or not to use the border style of menu. Defaults to False
 - `default_img_width`: Default size of image. Defaults to 25rem
 
 ## Hero styles

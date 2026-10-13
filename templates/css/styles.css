@@ -137,9 +137,9 @@
 
     /* Flexbox info */
     /* min-height: 22rem; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* justify-content: center; */
 
     border-style: none;
 }
