@@ -23,8 +23,8 @@
                           
         'skip_link_bg': v.get('skip_link_bg', v.get('hmbg_menu_bg', '#173e53')),
         'skip_link_col': v.get('skip_link_col', v.get('hmbg_menu_col', 'white')),
-        'footer_col': v.get('footer_bg', v.get('heading_bg', 'white')),
-        'footer_bg': v.get('footer_col', v.get('heading_col','#173e53')),
+        'footer_col': v.get('footer_col', v.get('heading_bg', 'white')),
+        'footer_bg': v.get('footer_bg', v.get('heading_col','#173e53')),
         'link_bg': v.get('link_bg', v.get('heading_bg', 'white')),
         'link_col': v.get('link_col', v.get('heading_col', '#173e53')),
         'post_decoration_col': v.get('post_decoration_col', v.get('menu_bg', '#2e79a3')),
