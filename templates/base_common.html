@@ -6,6 +6,16 @@
     <meta charset="utf-8">
     <meta name="generator" content="Pelican">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {%- if page %}
+        {%- if page.noindex == "True" %}
+            <meta name="robots" content="noindex" />
+        {%- endif %}
+    {%- endif %}
+    {%- if article %}
+        {%- if article.noindex %}
+            <meta name="robots" content="noindex" />
+        {%- endif %}
+    {%- endif %}
     <title>{%- block title %}{{ SITENAME|striptags }}{%- endblock title %}</title>
     {%- block head %}
         {%- if SITESUBTITLE %}

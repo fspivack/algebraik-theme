@@ -22,6 +22,8 @@ You can also specify `:subtitle: <your subtitle>`, to be included in the page he
 
 For articles, you can specify `:cover_img: <path/to/img>` to refer to an image you want as the article's thumbnail.
 
+You can use ":noindex: True" To specify that you don't want a page or article to be indexed by web crawlers.
+
 ## Settings
 
 In addition to the standard settings, which you can access at [Pelican's settings page](https://docs.getpelican.com/en/latest/settings.html), this theme has a few custom settings. (None of them are required, but if you want to customise your website, you will want to use a few of these, particularly the colour options.)
