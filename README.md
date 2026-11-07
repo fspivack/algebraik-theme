@@ -6,7 +6,7 @@ Algebraik Theme is a theme for the Pelican static site generator. There are seve
 
 ## Homepage
 
-In Pelican, the homepage of the website uses the index.html template. In this theme, you can add the metadata `:home: True` for reStructuredText or `Home: True` for Markdown.
+In Pelican, the homepage of the website uses the `index.html` template. In this theme, you can add the metadata `:home: True` for reStructuredText or `Home: True` for Markdown.
 
 The template will then read the contents of that page and put it on the homepage. (Note that, where DISPLAY_PAGES_ON_MENU is set to True, those pages won't include the page with home set to True. It will, however, be put in the menu as the homepage if DISPLAY_HOME_ON_MENU isn't set to False.)
 
@@ -22,7 +22,7 @@ You can also specify `:subtitle: <your subtitle>`, to be included in the page he
 
 For articles, you can specify `:cover_img: <path/to/img>` to refer to an image you want as the article's thumbnail.
 
-You can use ":noindex: True" To specify that you don't want a page or article to be indexed by web crawlers.
+You can use `:noindex: True` To specify that you don't want a page or article to be indexed by web crawlers.
 
 ## Settings
 
@@ -153,7 +153,42 @@ You can completely replace the CSS in styles.css by specifying `ALTERTNATIVE_STY
 
 In Pelican, you can add your own templates, which can either be extra (and which you can use for a particular page or article by specifying the `:template:` metadata), or overrides (for instance, you can create `article.html` which, if put in the appropriate place, will override the theme's `article.html`).
 
-Additionally, this theme allows two optional templates: `extra_top.html` and `extra_bottom.html`. If provided, the contents of these templates will be added at the top and bottom respectively of the content section on all pages.
+Additionally, this theme makes it easy for you to add your own html customisation by overriding the `base.html`. `base.html` extends `base_common.html`, the latter of which contains most of the html structure. The other templates then extend `base.html`. `base_common.html` contains several blocks which you can expand upon by creating your own `base.html` and placing it in your templates directory.
+
+### Base blocks
+
+The blocks in `base_common.html` which you may want to extend in your custom `base.html`, are:
+
+- `outerhead`
+- `head`
+- `title`
+- `extratitle`
+- `body`
+- `outercontent`
+- `footer`
+
+You can make use of `{{ super() }}` to replicate everything in the original block.
+
+### Base override example
+
+Here is an example of using your own base:
+
+```
+{% extends "base_common.html" %}
+
+{%- block outercontent %}
+		<div class="before">
+		    Stuff you want before the main content
+		</div>
+    {{ super() }}
+ 		<div class="after">
+		    Stuff you want after the main content
+		</div>
+
+{%- endblock outercontent %}
+```
+
+All your pages and articles will now have your extra html.
 
 ## How to use
 
@@ -192,3 +227,4 @@ This project is licensed under the [MIT License](LICENSE).
 ## Contact
 
 If you'd like to get in touch, please feel free to contact me at spivack.f@gmail.com.
+

@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="{%- block html_lang %}{{ DEFAULT_LANG }}{%- endblock html_lang %}">
 <head>
+    {% block outerhead %}
     <meta charset="utf-8">
     <meta name="generator" content="Pelican">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,8 +17,8 @@
             <meta name="robots" content="noindex" />
         {%- endif %}
     {%- endif %}
-    <title>{%- block title %}{{ SITENAME|striptags }}{%- endblock title %}</title>
-    {%- block head %}
+    <title>{%- block title %}{% block extratitle %}{% endblock  extratitle %}{{ SITENAME|striptags }}{%- endblock title %}</title>
+    {% block head %}
         {%- if SITESUBTITLE %}
             <meta name="description" content="{{ SITESUBTITLE }}" />
         {%- endif %}
@@ -70,11 +71,13 @@
         {%- elif ICON_PNG %}
             <link rel="icon" href="{{ SITEURL }}/{{ ICON_PNG }}" type="image/png">
         {%- endif %}
-    {%- endblock head %}
+    {% endblock head %}
 
     <script type="text/javascript" src="{{ SITEURL }}/theme/js/main.js"></script>
+    {% endblock outerhead %}
 </head>
 <body onresize="resetElements();">
+    {% block body %}
     <a href="#main-anchor" class="skip-link">Skip to content</a>
     <header class="top-container">
         <div class="top">
@@ -111,9 +114,9 @@
 
     <main tabindex="-1" id="main-anchor" class="style-main">
         <div class="content content-styles">
-            {%- include 'extra_top.html' ignore missing %}
-            {%- block content %}{%- endblock content %}
-            {%- include 'extra_bottom.html' ignore missing %}
+            {% block outercontent %}
+                {%- block content %}{%- endblock content %}
+            {% endblock outercontent %}
         </div>
     </main>
     <div style="clear: both;"></div><!-- Make sure floats don't overlap the footer -->
@@ -129,6 +132,7 @@
         Back to top
     </button>
     <footer>
+        {% block footer %}
         <span class="footer-inner">
             {%- if (not FOOTER_SECTIONS) or (FOOTER_SECTIONS == 1) %}
                 <span class="footer-centre" style="width:100%;">
@@ -148,6 +152,8 @@
                 <span class="footer-right" style="width:33%;">{{ FOOTER_RIGHT }}</span>
             {%- endif %}
         </span>
+        {% endblock footer %}
     </footer>
+    {% endblock body %}
 </body>
 </html>
